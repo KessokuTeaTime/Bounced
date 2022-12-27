@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "bounced",
+  "version": "${version}",
+
+  "name": "Bounced",
+  "description": "Get your Minecraft titles bounced!",
+  "authors": [
+    "KrLite"
+  ],
+  "contact": {
+    "homepage": "https://github.com/KrLite",
+    "sources": "https://github.com/KrLite/Bounced"
+  },
+
+  "license": "GPL-3.0",
+  "icon": "assets/bounced/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.krlite.bounced.Bounced"
+    ]
+  },
+  "mixins": [
+    "bounced.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.11",
+    "fabric-api": "*",
+    "minecraft": "~1.19.3",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
