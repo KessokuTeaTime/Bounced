@@ -1,7 +1,6 @@
 package net.krlite.bounced;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,10 +27,6 @@ public class Bounced implements ModInitializer {
 		public long queueElapsed() {
 			return System.currentTimeMillis() - origin;
 		}
-
-		public double queueAsPercentage() {
-			return (double) queue() / (double) lasting;
-		}
 	}
 
 	public record Pusher(AtomicBoolean ready) {
@@ -39,16 +34,16 @@ public class Bounced implements ModInitializer {
 			this(new AtomicBoolean(ready));
 		}
 
-		public void let() {
+		public void push() {
 			ready.set(true);
 		}
 
-		public boolean queue() {
-			return ready.get();
+		public boolean pull() {
+			return ready.get() && ready.getAndSet(false);
 		}
 
-		public boolean access() {
-			return ready.getAndSet(false);
+		public void and(boolean and, Runnable runnable) {
+			if (and && pull()) runnable.run();
 		}
 	}
 

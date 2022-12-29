@@ -21,7 +21,7 @@ import static net.krlite.bounced.Bounced.PUSHER;
 class Trigger {
 	@Inject(method = "setScreen", at = @At("TAIL"))
 	private void trigger(Screen screen, CallbackInfo ci) {
-		if (!(screen instanceof TitleScreen)) PUSHER.let();
+		if (!(screen instanceof TitleScreen)) PUSHER.push();
 	}
 }
 
@@ -31,7 +31,8 @@ class Trigger {
 @Mixin(TitleScreen.class)
 public class MinecraftAnimator {
 	private Bounced.Timer timer = new Bounced.Timer(853);
-	private double yPos = 0;
+	private final double offset = MinecraftClient.getInstance().getWindow().getScaledHeight() / 3.5;
+	private double yPos;
 
 	/**
 	 * Triggers the animation when the title is first rendered.
@@ -48,7 +49,7 @@ public class MinecraftAnimator {
 	)
 	private float trigger(float alpha) {
 		// Short-circuit manipulation
-		if (alpha > 0 && PUSHER.access()) timer = timer.reset();
+		PUSHER.and(alpha > 0, () -> timer = timer.reset());
 		return alpha;
 	}
 
@@ -58,12 +59,14 @@ public class MinecraftAnimator {
 	@Inject(
 			method = "render",
 			at = @At(
-					value = "FIELD", target = "Lnet/minecraft/client/gui/screen/TitleScreen;MINECRAFT_TITLE_TEXTURE:Lnet/minecraft/util/Identifier;",
+					value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderColor(FFFF)V",
 					shift = At.Shift.AFTER
+			),
+			slice = @Slice(
+					from = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/screen/TitleScreen;MINECRAFT_TITLE_TEXTURE:Lnet/minecraft/util/Identifier;")
 			)
 	)
 	private void animate(MatrixStack matrixStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-		double offset = MinecraftClient.getInstance().getWindow().getScaledHeight() / 3.5;
 		yPos = Bounced.easeOutBounce(-offset, offset, timer);
 	}
 
