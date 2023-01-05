@@ -14,5 +14,6 @@ public class Bounced implements ModInitializer {
 	public static final Pusher PUSHER = new Pusher(true);
 
 	@Override
-	public void onInitialize() {}
+	public void onInitialize() {
+	}
 }
