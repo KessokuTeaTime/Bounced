@@ -1,6 +1,7 @@
 package net.krlite.bounced.mixin;
 
-import net.krlite.bounced.Bounced;
+import net.krlite.equator.math.EasingFunctions;
+import net.krlite.equator.util.Timer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
@@ -30,7 +31,7 @@ class Trigger {
  */
 @Mixin(TitleScreen.class)
 public class MinecraftAnimator {
-	private Bounced.Timer timer = new Bounced.Timer(853);
+	private Timer timer = new Timer(853);
 	private final double offset = MinecraftClient.getInstance().getWindow().getScaledHeight() / 3.5;
 	private double yPos;
 
@@ -67,7 +68,7 @@ public class MinecraftAnimator {
 			)
 	)
 	private void animate(MatrixStack matrixStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-		yPos = Bounced.easeOutBounce(-offset, offset, timer);
+		yPos = EasingFunctions.Bounce.easeOut(timer, offset) - offset;
 	}
 
 	/**
