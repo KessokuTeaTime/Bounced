@@ -12,5 +12,5 @@
 <br />
 
 <p align=center>
-    <img src="/artwork/content/bounced.gif" />
+    <img alt="Minecrat Title is Bouncing" src="/artwork/content/bounced.gif" />
 </p>
