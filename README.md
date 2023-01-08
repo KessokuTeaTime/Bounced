@@ -4,9 +4,9 @@
 
 **Bounces your Minecraft title as it loads.**
 
-As you've concerned, **Bounced** does nothing except make your Minecraft titles animated through an easing bouncing function, every time the titles are shown.
+**Bounced** does nothing except making your Minecraft titles bounced every time the titles are shown, adding a little vitality to the rigid title screen.
 
-This mod is too simple to have a config, and if you don't like the animations, just delete the mod. If you like it, feel free recommending **Bounced** to your friends!
+**Bounced** may be too simple to have a config, and if you don't like the animations, just uninstall the mod. Otherwise if you like it, feel free recommending **Bounced** to your friends!
 
 # 
 <br />
