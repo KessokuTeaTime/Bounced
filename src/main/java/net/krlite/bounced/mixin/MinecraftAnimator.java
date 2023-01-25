@@ -32,7 +32,7 @@ class Trigger {
  */
 @Mixin(TitleScreen.class)
 public class MinecraftAnimator {
-	private Timer timer = new Timer(853);
+	private final Timer timer = new Timer(853);
 	private final double offset = MinecraftClient.getInstance().getWindow().getScaledHeight() / 3.5;
 	private double yPos;
 
@@ -51,7 +51,7 @@ public class MinecraftAnimator {
 	)
 	private float trigger(float alpha) {
 		// Short-circuit manipulation
-		PUSHER.and(alpha > 0, () -> timer = timer.reset());
+		PUSHER.and(alpha > 0, timer::reset);
 		return alpha;
 	}
 
