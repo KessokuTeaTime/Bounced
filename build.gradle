@@ -17,7 +17,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	implementation include("com.github.KrLite:Equator-Utils:${project.equator_utils_version}")
+	implementation include("com.github.KrLite:Equator-Utils:${project.eu_version}")
 }
 
 processResources {
