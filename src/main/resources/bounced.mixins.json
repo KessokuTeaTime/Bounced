@@ -6,10 +6,11 @@
   "mixins": [
   ],
   "client": [
-    "MinecraftAnimator",
-    "Trigger"
+	"LogoDrawerAnimator",
+	"SplashTextAnimator",
+	"Trigger"
   ],
   "injectors": {
-    "defaultRequire": 0
+	"defaultRequire": 0
   }
 }
