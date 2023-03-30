@@ -2,7 +2,7 @@
 
 # BOUNCED!
 
-**Bounces your Minecraft title as it loads.**
+### Bounces your Minecraft title as it loads.
 
 **Bounced** does nothing except making your Minecraft titles bounced every time the titles are shown, adding a little vitality to the rigid title screen.
 
