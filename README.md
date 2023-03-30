@@ -11,6 +11,6 @@
 # 
 <br />
 
-<p align=center>
+<p align=left>
     <img src="/artwork/content/bounced.gif" />
 </p>
