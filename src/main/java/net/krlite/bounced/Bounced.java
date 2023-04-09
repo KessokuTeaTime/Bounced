@@ -33,7 +33,6 @@ public class Bounced implements ModInitializer {
 	}
 
 	public static void resetWhen(boolean condition) {
-		System.out.println(shouldAnimate.get());
 		if (condition && shouldAnimate.getAndSet(false))
 			startTime = System.currentTimeMillis();
 	}
