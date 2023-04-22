@@ -10,36 +10,84 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Bounced implements ModInitializer {
 	public static final String NAME = "Bounced!", ID = "bounced";
 	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
-	private static double yPos;
-	private static long startTime;
-	private static final long animationTime = 863;
-	private static final AtomicBoolean shouldAnimate = new AtomicBoolean(true);
+	private static double primaryPos, secondaryPos;
+	private static long startTime, initializationTime, thresholdOffset;
+	private static final long
+			primaryAnimationTime = 863 /* Animation time for the 'MINECRAFT' logo */ ,
+			secondaryAnimationTime = 936 /* Animation time for the 'EDITION' banner and splash text */ ;
+	private static final AtomicBoolean
+			shouldAnimate = new AtomicBoolean(true),
+			shouldJump = new AtomicBoolean(false);
 
 	@Override
 	public void onInitialize() {
 	}
 
 	public static void update() {
-		double offset = MinecraftClient.getInstance().getWindow().getScaledHeight() / 4.1;
-		yPos = (shouldAnimate.get () ? 0 : easeOutBounce() * offset) - offset;
+		if (isIntro()) {
+			double offset = MinecraftClient.getInstance().getWindow().getScaledHeight() / 4.1;
+			primaryPos = (shouldAnimate.get() ? 0 : easeOutBounce(primaryAnimationTime) * offset) - offset;
+			secondaryPos = (shouldAnimate.get() ? 0 : easeOutBounce(secondaryAnimationTime) * offset) - offset;
+		}
+		else {
+			double offset = MinecraftClient.getInstance().getWindow().getScaledHeight() / 7.0;
+
+			if (shouldAnimate.get()) {
+				primaryPos = 0;
+				secondaryPos = 0;
+			}
+			else {
+				if (shouldJump.get() && Math.max(Math.abs(-offset - primaryPos()), Math.abs(-offset - secondaryPos())) > 0.5) {
+					primaryPos += (-offset - primaryPos()) * 0.26;
+					secondaryPos += (-offset - secondaryPos()) * 0.23;
+
+					startTime = System.currentTimeMillis();
+				} else {
+					shouldJump.set(false);
+
+					primaryPos = easeOutBounce(primaryAnimationTime) * offset - offset;
+					secondaryPos = easeOutBounce(secondaryAnimationTime) * offset - offset;
+				}
+			}
+		}
 	}
 
-	public static double getPos() {
-		return yPos;
+	public static double primaryPos() {
+		return primaryPos;
+	}
+
+	public static double secondaryPos() {
+		return secondaryPos;
+	}
+
+	public static long totalAnimationTime() {
+		return Math.max(primaryAnimationTime, secondaryAnimationTime);
+	}
+
+	public static boolean isIntro() {
+		return System.currentTimeMillis() - (initializationTime + thresholdOffset) <= totalAnimationTime();
+	}
+
+	public static void init() {
+		initializationTime = System.currentTimeMillis();
+		thresholdOffset = -1;
+		shouldJump.set(false);
 	}
 
 	public static void push() {
 		shouldAnimate.set(true);
+		shouldJump.set(true);
 	}
 
 	public static void resetWhen(boolean condition) {
-		System.out.println(shouldAnimate.get());
-		if (condition && shouldAnimate.getAndSet(false))
+		if (condition && shouldAnimate.getAndSet(false)) {
 			startTime = System.currentTimeMillis();
+			if (thresholdOffset == -1) thresholdOffset = System.currentTimeMillis() - initializationTime;
+		}
 	}
 
-	public static double easeOutBounce() {
-		double progress = Math.min((double) (System.currentTimeMillis() - startTime) / animationTime, 1);
+	public static double easeOutBounce(double animationTime) {
+		double progress = Math.min((System.currentTimeMillis() - startTime) / animationTime, 1);
 
 		if (progress < 1 / 2.75) {
 			return 7.5625 * progress * progress;
