@@ -60,16 +60,4 @@ public class SplashTextAnimator {
 	private float animateSplashText(float y) {
 		return (float) (y + Bounced.secondaryPos());
 	}
-
-	@Inject(method = "mouseClicked", at = @At("RETURN"))
-	private void jump(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
-		double centerX = MinecraftClient.getInstance().getWindow().getScaledWidth() / 2.0, y = 30, width = 310, height = 44;
-		if (
-				!Bounced.isIntro()
-						&& mouseX >= centerX - width / 2 && mouseX <= centerX + width / 2
-						&& mouseY >= y && mouseY <= y + height
-		) {
-			Bounced.push();
-		}
-	}
 }

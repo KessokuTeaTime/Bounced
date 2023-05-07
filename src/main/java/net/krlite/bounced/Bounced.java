@@ -1,7 +1,12 @@
 package net.krlite.bounced;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
+import net.fabricmc.loader.api.FabricLoader;
+import net.krlite.splasher.Splasher;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.TitleScreen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +26,26 @@ public class Bounced implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		boolean isSplasherLoaded = FabricLoader.getInstance().isModLoaded("splasher");
+		System.out.println(isSplasherLoaded);
+
+		ScreenEvents.BEFORE_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
+			if (screen instanceof TitleScreen) {
+				ScreenMouseEvents.beforeMouseClick(screen)
+						.register((currentScreen, mouseX, mouseY, button) -> {
+							double centerX = scaledWidth / 2.0, y = 30, width = 310, height = 44;
+							if (!isIntro()
+										&& mouseX >= centerX - width / 2 && mouseX <= centerX + width / 2
+										&& mouseY >= y && mouseY <= y + height
+							) {
+								if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY)) {
+									// Linkage with Splasher
+									push();
+								}
+							}
+						});
+			}
+		});
 	}
 
 	public static void update() {
