@@ -27,7 +27,6 @@ public class Bounced implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		boolean isSplasherLoaded = FabricLoader.getInstance().isModLoaded("splasher");
-		System.out.println(isSplasherLoaded);
 
 		ScreenEvents.BEFORE_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
 			if (screen instanceof TitleScreen) {
