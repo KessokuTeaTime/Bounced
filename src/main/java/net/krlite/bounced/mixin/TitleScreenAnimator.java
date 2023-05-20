@@ -1,7 +1,7 @@
 package net.krlite.bounced.mixin;
 
 import net.krlite.bounced.Bounced;
-import net.minecraft.client.gui.LogoDrawer;
+import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -9,11 +9,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/**
- * This class is responsible for animating the logo.
- */
-@Mixin(LogoDrawer.class)
-public class LogoDrawerAnimator {
+@Mixin(TitleScreen.class)
+public class TitleScreenAnimator {
 	/**
 	 * Applies the animation transformation to the 'MINECRAFT' logo.
 	 */
