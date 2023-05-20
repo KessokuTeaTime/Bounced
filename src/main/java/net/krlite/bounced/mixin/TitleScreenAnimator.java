@@ -15,10 +15,10 @@ public class TitleScreenAnimator {
 	 * Applies the animation transformation to the 'MINECRAFT' logo.
 	 */
 	@Inject(
-			method = "draw(Lnet/minecraft/client/util/math/MatrixStack;IFI)V",
-			at = @At("HEAD")
+			method = "render",
+			at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShader(Ljava/util/function/Supplier;)V", ordinal = 1)
 	)
-	private void animateLogoPre(MatrixStack matrixStack, int screenWidth, float alpha, int y, CallbackInfo ci) {
+	private void animateLogoPre(MatrixStack matrixStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
 		matrixStack.push();
 		matrixStack.translate(0, Bounced.primaryPos(), 0);
 	}
@@ -27,11 +27,11 @@ public class TitleScreenAnimator {
 	 * Pops the matrix stack after rendering the 'MINECRAFT' logo.
 	 */
 	@Inject(
-			method = "draw(Lnet/minecraft/client/util/math/MatrixStack;IFI)V",
+			method = "render",
 			at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/util/Identifier;)V", shift = At.Shift.BEFORE),
-			slice = @Slice(from = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderColor(FFFF)V"))
+			slice = @Slice(from = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/screen/TitleScreen;isMinceraft:Z"))
 	)
-	private void animateLogoPost(MatrixStack matrixStack, int screenWidth, float alpha, int y, CallbackInfo ci) {
+	private void animateLogoPost(MatrixStack matrixStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
 		matrixStack.pop();
 	}
 
@@ -39,11 +39,11 @@ public class TitleScreenAnimator {
 	 * Applies the animation transformation to the 'EDITION' banner.
 	 */
 	@Inject(
-			method = "draw(Lnet/minecraft/client/util/math/MatrixStack;IFI)V",
+			method = "render",
 			at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/util/Identifier;)V", shift = At.Shift.BEFORE),
-			slice = @Slice(from = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderColor(FFFF)V"))
+			slice = @Slice(from = @At(value = "FIELD", target = "Lnet/minecraft/client/gui/screen/TitleScreen;isMinceraft:Z"))
 	)
-	private void animateBannerPre(MatrixStack matrixStack, int screenWidth, float alpha, int y, CallbackInfo ci) {
+	private void animateBannerPre(MatrixStack matrixStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
 		matrixStack.push();
 		matrixStack.translate(0, Bounced.secondaryPos(), 0);
 	}
@@ -52,10 +52,10 @@ public class TitleScreenAnimator {
 	 * Pops the matrix stack after rendering the 'EDITION' banner.
 	 */
 	@Inject(
-			method = "draw(Lnet/minecraft/client/util/math/MatrixStack;IFI)V",
-			at = @At("RETURN")
+			method = "render",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/TitleScreen;drawTexture(Lnet/minecraft/client/util/math/MatrixStack;IIFFIIII)V", shift = At.Shift.AFTER)
 	)
-	private void animateBannerPost(MatrixStack matrixStack, int screenWidth, float alpha, int y, CallbackInfo ci) {
+	private void animateBannerPost(MatrixStack matrixStack, int mouseX, int mouseY, float delta, CallbackInfo ci) {
 		matrixStack.pop();
 	}
 }
