@@ -7,7 +7,6 @@ import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * This class is responsible for triggering the title animation before the title screen is rendered.
@@ -53,11 +52,11 @@ public class SplashTextAnimator {
 			method = "render",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V",
+					target = "Lnet/minecraft/client/util/math/MatrixStack;translate(DDD)V",
 					ordinal = 0
 			), index = 1
 	)
-	private float animateSplashText(float y) {
+	private double animateSplashText(double y) {
 		return (float) (y + Bounced.secondaryPos());
 	}
 }

@@ -28,8 +28,8 @@
 
   "depends": {
     "fabricloader": ">=0.14.19",
-    "fabric-api": "*",
-    "minecraft": "~1.19.3"
+    "fabric": "*",
+    "minecraft": ["~1.19", "~1.19.1", "~1.19.2"]
   },
   "suggests": {
   }
