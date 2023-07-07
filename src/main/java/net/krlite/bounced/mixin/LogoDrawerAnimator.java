@@ -1,6 +1,7 @@
 package net.krlite.bounced.mixin;
 
 import net.krlite.bounced.Bounced;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.LogoDrawer;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,47 +19,65 @@ public abstract class LogoDrawerAnimator {
 	 * Applies the animation transformation to the 'MINECRAFT' logo.
 	 */
 	@Inject(
-			method = "draw(Lnet/minecraft/client/util/math/MatrixStack;IFI)V",
-			at = @At("HEAD")
+			method = "draw(Lnet/minecraft/client/gui/DrawContext;IFI)V",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIFFIIII)V",
+					shift = At.Shift.BEFORE,
+					ordinal = 0
+			)
 	)
-	private void animateLogoPre(MatrixStack matrixStack, int screenWidth, float alpha, int y, CallbackInfo ci) {
-		matrixStack.push();
-		matrixStack.translate(0, Bounced.primaryPos(), 0);
+	private void animateLogoPre(DrawContext context, int screenWidth, float alpha, int y, CallbackInfo ci) {
+		context.getMatrices().push();
+		context.getMatrices().translate(0, Bounced.primaryPos(), 0);
 	}
 
 	/**
 	 * Pops the matrix stack after rendering the 'MINECRAFT' logo.
 	 */
 	@Inject(
-			method = "draw(Lnet/minecraft/client/util/math/MatrixStack;IFI)V",
-			at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/util/Identifier;)V", shift = At.Shift.BEFORE),
-			slice = @Slice(from = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderColor(FFFF)V"))
+			method = "draw(Lnet/minecraft/client/gui/DrawContext;IFI)V",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIFFIIII)V",
+					shift = At.Shift.AFTER,
+					ordinal = 0
+			)
 	)
-	private void animateLogoPost(MatrixStack matrixStack, int screenWidth, float alpha, int y, CallbackInfo ci) {
-		matrixStack.pop();
+	private void animateLogoPost(DrawContext context, int screenWidth, float alpha, int y, CallbackInfo ci) {
+		context.getMatrices().pop();
 	}
 
 	/**
 	 * Applies the animation transformation to the 'EDITION' banner.
 	 */
 	@Inject(
-			method = "draw(Lnet/minecraft/client/util/math/MatrixStack;IFI)V",
-			at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/util/Identifier;)V", shift = At.Shift.BEFORE),
-			slice = @Slice(from = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderColor(FFFF)V"))
+			method = "draw(Lnet/minecraft/client/gui/DrawContext;IFI)V",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIFFIIII)V",
+					shift = At.Shift.BEFORE,
+					ordinal = 1
+			)
 	)
-	private void animateBannerPre(MatrixStack matrixStack, int screenWidth, float alpha, int y, CallbackInfo ci) {
-		matrixStack.push();
-		matrixStack.translate(0, Bounced.secondaryPos(), 0);
+	private void animateBannerPre(DrawContext context, int screenWidth, float alpha, int y, CallbackInfo ci) {
+		context.getMatrices().push();
+		context.getMatrices().translate(0, Bounced.secondaryPos(), 0);
 	}
 
 	/**
 	 * Pops the matrix stack after rendering the 'EDITION' banner.
 	 */
 	@Inject(
-			method = "draw(Lnet/minecraft/client/util/math/MatrixStack;IFI)V",
-			at = @At("RETURN")
+			method = "draw(Lnet/minecraft/client/gui/DrawContext;IFI)V",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIFFIIII)V",
+					shift = At.Shift.AFTER,
+					ordinal = 1
+			)
 	)
-	private void animateBannerPost(MatrixStack matrixStack, int screenWidth, float alpha, int y, CallbackInfo ci) {
-		matrixStack.pop();
+	private void animateBannerPost(DrawContext context, int screenWidth, float alpha, int y, CallbackInfo ci) {
+		context.getMatrices().pop();
 	}
 }

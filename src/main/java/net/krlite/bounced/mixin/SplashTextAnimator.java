@@ -3,6 +3,7 @@ package net.krlite.bounced.mixin;
 import net.krlite.bounced.Bounced;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.SplashTextRenderer;
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
@@ -45,7 +46,10 @@ public class SplashTextAnimator {
 		Bounced.update();
 		return progress;
 	}
+}
 
+@Mixin(SplashTextRenderer.class)
+class SplashTextTranslator {
 	/**
 	 * Applies the animation transformation to the splash text.
 	 */
