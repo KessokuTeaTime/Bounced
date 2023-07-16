@@ -3,4 +3,4 @@
 ### Bounced for `1.19.3`
 
 > **Note**
-> This version of Bounced is outdated. Newer modifies will only be made to the latst few versions.
+> This version of **Bounced** is outdated. Newer modifies will only be made to the latst few versions.
