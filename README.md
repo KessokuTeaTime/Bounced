@@ -13,5 +13,5 @@
 <br />
 
 <p align="center">
-    <img src="/artwork/content/bounced-2.1.0.gif?raw=true" />
+    <img src="https://github.com/KrLite/Bounced/blob/artwork/content/bounced-2.1.0.gif?raw=true" />
 </p>
