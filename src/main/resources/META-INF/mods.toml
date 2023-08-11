@@ -1,0 +1,14 @@
+modLoader = "javafml"
+loaderVersion = "[43,)"
+license = "MIT"
+
+[[mods]]
+modId = "bounced"
+version = "${version}"
+displayName = "Bounced"
+credits="Kasualix - Forge Port"
+authors="KrLite"
+logoFile="icon.png"
+description = '''
+Such A Vibrant Title!
+'''
