@@ -1,14 +1,16 @@
 {
   "required": true,
+  "minVersion": "0.8",
   "package": "net.krlite.bounced.mixin",
   "compatibilityLevel": "JAVA_17",
-  "minVersion": "0.8",
-  "injectors": {
-    "defaultRequire": 0
-  },
+  "mixins": [
+  ],
   "client": [
-    "SplashTextAnimator",
-    "TitleScreenAnimator",
-    "Trigger"
-  ]
+	"SplashTextAnimator",
+	"TitleScreenAnimator",
+	"Trigger"
+  ],
+  "injectors": {
+	"defaultRequire": 0
+  }
 }
