@@ -21,7 +21,7 @@ public class BouncedClientForge {
     }
 
     public void onInitializeClient(FMLClientSetupEvent event) {
-        /* TODO: Waiting for Splasher Architectury version release!
+        /* TODO: Waiting for Splasher 4.0.6 released!
         ClientGuiEvent.INIT_POST.register((screen, screenAccess) -> {
             if (screen instanceof TitleScreen) {
                 ClientScreenInputEvent.MOUSE_CLICKED_POST.register((client, currentScreen, mouseX, mouseY, button) -> {
