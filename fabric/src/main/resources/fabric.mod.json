@@ -2,35 +2,29 @@
   "schemaVersion": 1,
   "id": "bounced",
   "version": "${version}",
-
   "name": "Bounced",
   "description": "Such A Vibrant Title!",
   "authors": [
-    "KrLite"
+    "KrLite", "TexTrue"
   ],
   "contact": {
     "homepage": "https://github.com/KrLite",
     "sources": "https://github.com/KrLite/Bounced"
   },
-
   "license": "GPL-3.0",
-  "icon": "assets/bounced/icon.png",
-
-  "environment": "*",
+  "icon": "icon.png",
+  "environment": "client",
   "entrypoints": {
-    "main": [
-      "net.krlite.bounced.Bounced"
+    "client": [
+      "net.krlite.bounced.fabric.BouncedClientFabric"
     ]
   },
-  "mixins": [
-    "bounced.mixins.json"
-  ],
-
   "depends": {
-    "fabricloader": ">=0.14.21",
-    "fabric-api": "*",
-    "minecraft": ["~1.20", "~1.20.1"]
+    "fabric": "*",
+    "minecraft": "1.20.x",
+    "architectury": "*"
   },
-  "suggests": {
-  }
+  "mixins": [
+    "bounced.common.mixins.json"
+  ]
 }
