@@ -1,0 +1,23 @@
+name: Compatibility Improvement
+description: Improve compatibilities with other mods
+title: "[COMPATIBILITY]: "
+labels: ["compatibility"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this form of compatibility improvement!
+  - type: input
+    id: mod-link
+    attributes:
+      label: Mod Link
+      description: What's the mod's link?
+      placeholder: E.g., https://modrinth.com/mod/fabric-api
+    validations:
+      required: true
+  - type: textarea
+    id: propose-reason
+    attributes:
+      label: Why Should We be Compatible?
+    validations:
+      required: true
