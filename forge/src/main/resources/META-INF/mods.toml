@@ -1,0 +1,35 @@
+modLoader = "javafml"
+loaderVersion = "[39,)"
+license = "GPL-3.0"
+
+[[mods]]
+modId = "bounced"
+version = "${version}"
+displayName = "Bounced"
+displayURL = "https://github.com/KrLite/Bounced"
+authors = "KrLite, TexTrue"
+description = '''
+Such A Vibrant Title!
+'''
+logoFile = "icon.png"
+
+[[dependencies.bounced]]
+modId = "forge"
+mandatory = true
+versionRange = "[39,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.bounced]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.18,1.18.2]"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.bounced]]
+modId = "architectury"
+mandatory = true
+versionRange = "[4,)"
+ordering = "AFTER"
+side = "BOTH"
