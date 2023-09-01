@@ -12,8 +12,8 @@ body:
     attributes:
       label: "Which Mod Loader are You Using?"
       options:
-        - Quilt
         - Fabric
+        - Quilt
         - Forge
     validations:
       required: true
