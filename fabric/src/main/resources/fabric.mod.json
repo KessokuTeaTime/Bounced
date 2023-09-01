@@ -21,7 +21,7 @@
   },
   "depends": {
     "fabric": "*",
-    "minecraft": "1.20.x",
+    "minecraft": ["~1.19", "~1.19.1", "~1.19.2"],
     "architectury": "*"
   },
   "mixins": [
