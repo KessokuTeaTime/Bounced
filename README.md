@@ -1,5 +1,7 @@
 ### <p align=right>[`→` Modrinth](https://modrinth.com/mod/bounced)</p>
 
+###### <p align=right>This is an [Architectury](https://modrinth.com/mod/architectury-api) Port. [`←` Original Project](https://github.com/KrLite/Bounced)</p>
+
 # <p align="center">Bounced!</p>
 
 ###### <p align="center">Bounces your Minecraft title as it loads</p>
