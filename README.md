@@ -2,5 +2,5 @@
 
 ### Bounced for Fabric `1.19~1.19.2`
 
-> **Note**
+> [!WARNING]
 > This version of **Bounced** is outdated. Newer modifies will only be made to the latst few versions.
