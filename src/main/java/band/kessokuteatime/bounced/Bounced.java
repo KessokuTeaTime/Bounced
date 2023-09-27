@@ -1,4 +1,4 @@
-package net.krlite.bounced;
+package band.kessokuteatime.bounced;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
