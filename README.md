@@ -2,5 +2,5 @@
 
 ### Bounced for `1.18~1.18.2`
 
-> **Note**
+> [!NOTE]
 > This version of **Bounced** is outdated. Newer modifies will only be made to the latst few versions.
