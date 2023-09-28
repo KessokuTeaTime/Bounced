@@ -6,12 +6,13 @@
   "mixins": [
   ],
   "client": [
+    "AccessibilityOnboardingTrigger",
     "LogoDrawerAnimator",
     "SplashTextAnimator",
-	"SplashTextTranslator",
-	"Trigger"
+    "SplashTextTranslator",
+    "Trigger"
   ],
   "injectors": {
-	"defaultRequire": 0
+    "defaultRequire": 0
   }
 }

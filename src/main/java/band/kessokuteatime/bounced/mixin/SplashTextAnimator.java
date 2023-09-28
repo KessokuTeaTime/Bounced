@@ -2,9 +2,7 @@ package band.kessokuteatime.bounced.mixin;
 
 import band.kessokuteatime.bounced.Bounced;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.SplashTextRenderer;
-import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.client.gui.screen.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -16,7 +14,35 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 class Trigger {
 	@Inject(method = "setScreen", at = @At("TAIL"))
 	private void trigger(Screen screen, CallbackInfo ci) {
+		System.out.println(screen.getClass());
 		if (!(screen instanceof TitleScreen)) Bounced.push();
+	}
+}
+
+/**
+ * This class is responsible for triggering the title animation when the game starts for the first time.
+ */
+@Mixin(AccessibilityOnboardingScreen.class)
+class AccessibilityOnboardingTrigger {
+	@Inject(method = "init", at = @At("RETURN"))
+	private void init(CallbackInfo ci) {
+		Bounced.init();
+	}
+
+	/**
+	 * Triggers and restarts the animation.
+	 */
+	@ModifyArg(
+			method = "render",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/client/gui/RotatingCubeMapRenderer;render(FF)V"
+			), index = 1
+	)
+	private float trigger(float progress) {
+		Bounced.resetWhen(progress > 0.9);
+		Bounced.update();
+		return progress;
 	}
 }
 

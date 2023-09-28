@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,7 @@ public class Bounced implements ModInitializer {
 	public static final String NAME = "Bounced!", ID = "bounced";
 	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
 	private static double primaryPos, secondaryPos;
-	private static long startTime, initializationTime, thresholdOffset;
+	private static long startTime = -1, initializationTime = -1, thresholdOffset;
 	private static final long
 			primaryAnimationTime = 863 /* Animation time for the 'MINECRAFT' logo */ ,
 			secondaryAnimationTime = 936 /* Animation time for the 'EDITION' banner and splash text */ ;
@@ -29,7 +30,7 @@ public class Bounced implements ModInitializer {
 		boolean isSplasherLoaded = FabricLoader.getInstance().isModLoaded("splasher");
 
 		ScreenEvents.BEFORE_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
-			if (screen instanceof TitleScreen) {
+			if (screen instanceof TitleScreen || screen instanceof AccessibilityOnboardingScreen) {
 				ScreenMouseEvents.beforeMouseClick(screen)
 						.register((currentScreen, mouseX, mouseY, button) -> {
 							double centerX = scaledWidth / 2.0, y = 30, width = 310, height = 44;
@@ -37,10 +38,9 @@ public class Bounced implements ModInitializer {
 										&& mouseX >= centerX - width / 2 && mouseX <= centerX + width / 2
 										&& mouseY >= y && mouseY <= y + height
 							) {
-								if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY)) {
-									// Linkage with Splasher
+								// Linkage with Splasher
+								if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY))
 									push();
-								}
 							}
 						});
 			}
@@ -93,9 +93,11 @@ public class Bounced implements ModInitializer {
 	}
 
 	public static void init() {
-		initializationTime = System.currentTimeMillis();
-		thresholdOffset = -1;
-		shouldJump.set(false);
+		if (initializationTime == -1) {
+			initializationTime = System.currentTimeMillis();
+			thresholdOffset = -1;
+			shouldJump.set(false);
+		}
 	}
 
 	public static void push() {
