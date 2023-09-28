@@ -1,6 +1,6 @@
 ### <p align=right>[Main Branch `←`](https://github.com/KessokuTeaTime/Bounced)&emsp;[`→` Modrinth](https://modrinth.com/mod/bounced)</p>
 
-### Bounced for `1.18~1.18.2`
+### Bounced for Architectury `1.18~1.18.2`
 
 > [!WARNING]
-> This version of **Bounced** is outdated. Newer modifies will only be made to the latst few versions.
+> This version of **Bounced** is outdated. Newer modifications will only be made to the latst few versions.
