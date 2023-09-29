@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 class Trigger {
 	@Inject(method = "setScreen", at = @At("TAIL"))
 	private void trigger(Screen screen, CallbackInfo ci) {
-		System.out.println(screen.getClass());
 		if (!(screen instanceof TitleScreen)) Bounced.push();
 	}
 }
