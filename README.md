@@ -2,7 +2,7 @@
 
 # <p align="center">Bounced!</p>
 
-###### <p align="center">Bounces your Minecraft title as it loads</p>
+###### <p align="center">Bounces Your Minecraft Title as It Loads.</p>
 
 <br />
 
