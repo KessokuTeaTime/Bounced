@@ -1,0 +1,31 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+license = "GPL-3.0"
+
+[[mods]]
+modId = "bounced"
+version = "${version}"
+displayName = "Bounced for NeoForge"
+displayURL = "https://github.com/KessokuTeaTime/Bounced"
+authors = "Kessoku Tea Time"
+description = '''
+Get Your Minecraft Title Bounced!
+'''
+logoFile = "icon.png"
+
+[[mixins]]
+config = "bounced.mixins.json"
+
+[[dependencies.bounced]]
+modId = "neoforge"
+mandatory = true
+versionRange = "[20,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.bounced]]
+modId = "architectury"
+mandatory = true
+versionRange = "[10,)"
+ordering = "AFTER"
+side = "BOTH"

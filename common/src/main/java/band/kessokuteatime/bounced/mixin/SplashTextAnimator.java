@@ -32,7 +32,7 @@ class AccessibilityOnboardingTrigger {
 	 * Triggers and restarts the animation.
 	 */
 	@ModifyArg(
-			method = "render",
+			method = "renderBackground",
 			at = @At(
 					value = "INVOKE",
 					target = "Lnet/minecraft/client/gui/RotatingCubeMapRenderer;render(FF)V"

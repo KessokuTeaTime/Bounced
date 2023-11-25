@@ -1,0 +1,36 @@
+modLoader = "javafml"
+loaderVersion = "[46,)"
+license = "GPL-3.0"
+
+[[mods]]
+modId = "bounced"
+version = "${version}"
+displayName = "Bounced for Forge"
+displayURL = "https://github.com/KessokuTeaTime/Bounced"
+authors = "Kessoku Tea Time"
+description = '''
+Get Your Minecraft Title Bounced!
+'''
+logoFile = "icon.png"
+
+
+[[dependencies.bounced]]
+modId = "forge"
+mandatory = true
+versionRange = "[46,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.bounced]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.bounced]]
+modId = "architectury"
+mandatory = true
+versionRange = "[10,)"
+ordering = "AFTER"
+side = "BOTH"

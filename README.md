@@ -1,6 +1,6 @@
-### <p align=right>[`→` Modrinth](https://modrinth.com/mod/bounced)</p>
+### ### <p align=right>[Main Branch `←`](https://github.com/KessokuTeaTime/Bounced)&emsp;[`→` Modrinth](https://modrinth.com/mod/bounced)</p>
 
-# <p align="center">Bounced!</p>
+# <p align="center">Bounced! for MinecraftForge & NeoForge `1.20.2`</p>
 
 ###### <p align="center">Bounces Your Minecraft Title as It Loads.</p>
 
