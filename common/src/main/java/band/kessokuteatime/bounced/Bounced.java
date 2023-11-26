@@ -1,6 +1,6 @@
 package band.kessokuteatime.bounced;
 
-//import band.kessokuteatime.splasher.Splasher;
+import band.kessokuteatime.splasher.Splasher;
 import dev.architectury.event.EventResult;
 import dev.architectury.event.events.client.ClientGuiEvent;
 import dev.architectury.event.events.client.ClientScreenInputEvent;
@@ -38,8 +38,8 @@ public class Bounced {
 										&& mouseY >= y && mouseY <= y + height
 							) {
 								// Linkage with Splasher
-								//if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY))
-								//	push();
+								if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY))
+									push();
 							}
                     return EventResult.pass();
                 });
