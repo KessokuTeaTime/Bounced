@@ -13,7 +13,7 @@ loom {
     }
 }
 
-project.archivesBaseName = rootProject.archivesBaseName + "-forge"
+project.archivesBaseName = rootProject.archivesBaseName + "-lexforge"
 
 configurations {
     common

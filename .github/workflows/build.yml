@@ -28,10 +28,10 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew build
-      - name: Upload artifacts (forge)
+      - name: Upload artifacts (lexforge)
         uses: actions/upload-artifact@v3
         with:
-          name: Artifacts-forge
+          name: Artifacts-lexforge
           path: ${{ github.workspace }}/forge/build/libs
       - name: Upload artifacts (neoforge)
         uses: actions/upload-artifact@v3
