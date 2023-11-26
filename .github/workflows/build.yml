@@ -36,5 +36,5 @@ jobs:
       - name: Upload artifacts (neoforge)
         uses: actions/upload-artifact@v3
         with:
-          name: Artifacts-forge
+          name: Artifacts-neoforge
           path: ${{ github.workspace }}/neoforge/build/libs
