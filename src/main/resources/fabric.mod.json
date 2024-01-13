@@ -9,8 +9,9 @@
     "Kessoku Tea Time"
   ],
   "contact": {
-    "homepage": "https://github.com/KessokuTeaTime",
-    "sources": "https://github.com/KessokuTeaTime/Bounced"
+    "homepage": "https://modrinth.com/bounced",
+    "sources": "https://github.com/KessokuTeaTime/Bounced",
+    "issues": "https://github.com/KessokuTeaTime/Bounced/issues"
   },
 
   "license": "GPL-3.0",
@@ -29,7 +30,7 @@
   "depends": {
     "fabricloader": "*",
     "fabric-api": "*",
-    "minecraft": "1.19.4"
+    "minecraft": "~1.19.4"
   },
   "suggests": {
   }
