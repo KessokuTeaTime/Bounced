@@ -72,7 +72,7 @@ public class SplashTextAnimator {
 	}
 }
 
-@Mixin(SplashTextRenderer.class)
+@Mixin(TitleScreen.class)
 class SplashTextTranslator {
 	/**
 	 * Applies the animation transformation to the splash text.

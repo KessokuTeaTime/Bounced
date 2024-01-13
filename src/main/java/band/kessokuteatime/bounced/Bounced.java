@@ -1,10 +1,8 @@
 package band.kessokuteatime.bounced;
 
-import band.kessokuteatime.splasher.Splasher;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
 import net.minecraft.client.gui.screen.TitleScreen;
@@ -27,8 +25,6 @@ public class Bounced implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		boolean isSplasherLoaded = FabricLoader.getInstance().isModLoaded("splasher");
-
 		ScreenEvents.BEFORE_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
 			if (screen instanceof TitleScreen || screen instanceof AccessibilityOnboardingScreen) {
 				ScreenMouseEvents.beforeMouseClick(screen)
@@ -37,11 +33,7 @@ public class Bounced implements ModInitializer {
 							if (!isIntro()
 										&& mouseX >= centerX - width / 2 && mouseX <= centerX + width / 2
 										&& mouseY >= y && mouseY <= y + height
-							) {
-								// Linkage with Splasher
-								if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY))
-									push();
-							}
+							) push();
 						});
 			}
 		});
