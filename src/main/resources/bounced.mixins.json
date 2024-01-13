@@ -7,8 +7,7 @@
     "SplashTextTranslator"
   ],
   "client": [
-    "AccessibilityOnboardingTrigger",
-    "LogoDrawerAnimator",
+    "LogoAnimator",
     "SplashTextAnimator",
     "Trigger"
   ],

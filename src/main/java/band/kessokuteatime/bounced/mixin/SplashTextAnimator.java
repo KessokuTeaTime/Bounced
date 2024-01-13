@@ -19,33 +19,6 @@ class Trigger {
 }
 
 /**
- * This class is responsible for triggering the title animation when the game starts for the first time.
- */
-@Mixin(AccessibilityOnboardingScreen.class)
-class AccessibilityOnboardingTrigger {
-	@Inject(method = "init", at = @At("RETURN"))
-	private void init(CallbackInfo ci) {
-		Bounced.init();
-	}
-
-	/**
-	 * Triggers and restarts the animation.
-	 */
-	@ModifyArg(
-			method = "render",
-			at = @At(
-					value = "INVOKE",
-					target = "Lnet/minecraft/client/gui/RotatingCubeMapRenderer;render(FF)V"
-			), index = 1
-	)
-	private float trigger(float progress) {
-		Bounced.resetWhen(progress > 0.9);
-		Bounced.update();
-		return progress;
-	}
-}
-
-/**
  * This class is responsible for triggering the animation and animating the splash text.
  */
 @Mixin(TitleScreen.class)

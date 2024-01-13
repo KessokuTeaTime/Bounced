@@ -4,7 +4,6 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +25,7 @@ public class Bounced implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ScreenEvents.BEFORE_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
-			if (screen instanceof TitleScreen || screen instanceof AccessibilityOnboardingScreen) {
+			if (screen instanceof TitleScreen) {
 				ScreenMouseEvents.beforeMouseClick(screen)
 						.register((currentScreen, mouseX, mouseY, button) -> {
 							double centerX = scaledWidth / 2.0, y = 30, width = 310, height = 44;
