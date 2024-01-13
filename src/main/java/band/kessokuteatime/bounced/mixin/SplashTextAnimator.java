@@ -54,11 +54,11 @@ class SplashTextTranslator {
 			method = "render",
 			at = @At(
 					value = "INVOKE",
-					target = "Lnet/minecraft/client/util/math/MatrixStack;translate(FFF)V",
+					target = "Lnet/minecraft/client/util/math/MatrixStack;translate(DDD)V",
 					ordinal = 0
 			), index = 1
 	)
-	private float animateSplashText(float y) {
+	private double animateSplashText(double y) {
 		return (float) (y + Bounced.secondaryPos());
 	}
 }
