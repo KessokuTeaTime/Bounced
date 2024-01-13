@@ -93,11 +93,9 @@ public class Bounced implements ModInitializer {
 	}
 
 	public static void init() {
-		if (initializationTime == -1) {
-			initializationTime = System.currentTimeMillis();
-			thresholdOffset = -1;
-			shouldJump.set(false);
-		}
+		initializationTime = System.currentTimeMillis();
+		thresholdOffset = -1;
+		shouldJump.set(false);
 	}
 
 	public static void push() {
