@@ -1,6 +1,7 @@
 package band.kessokuteatime.bounced;
 
 import band.kessokuteatime.splasher.Splasher;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
@@ -13,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Bounced implements ModInitializer {
+public class Bounced implements ClientModInitializer {
 	public static final String NAME = "Bounced!", ID = "bounced";
 	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
 	private static double primaryPos, secondaryPos;
@@ -26,7 +27,7 @@ public class Bounced implements ModInitializer {
 			shouldJump = new AtomicBoolean(false);
 
 	@Override
-	public void onInitialize() {
+	public void onInitializeClient() {
 		boolean isSplasherLoaded = FabricLoader.getInstance().isModLoaded("splasher");
 
 		ScreenEvents.BEFORE_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
