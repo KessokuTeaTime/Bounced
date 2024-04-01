@@ -8,9 +8,12 @@ plugins {
 
 group = libs.versions.maven.group.get()
 version = "${libs.versions.minecraft.get()}-${libs.versions.mod.get()}"
+base.archivesName.set("${libs.versions.archives.name}-forge")
 
-base {
-	archivesName.set(libs.versions.archives.name)
+loom {
+	forge {
+		mixinConfig("bounced.mixins.json")
+	}
 }
 
 repositories {
@@ -23,6 +26,7 @@ dependencies {
 	minecraft(libs.minecraft)
 	mappings(libs.yarn) { artifact { classifier = "v2" } }
 	forge(libs.forge)
+	modApi(libs.architectury.api)
 
 	modCompileOnly(libs.splasher)
 }
@@ -38,7 +42,7 @@ tasks {
 	processResources {
 		inputs.property("version", libs.versions.mod.get())
 
-		filesMatching("fabric.mod.json") {
+		filesMatching("META-INF/mods.toml") {
 			expand(mapOf("version" to libs.versions.mod.get()))
 		}
 	}

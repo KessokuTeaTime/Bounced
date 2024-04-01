@@ -1,20 +1,27 @@
 package band.kessokuteatime.bounced;
 
 import band.kessokuteatime.splasher.Splasher;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
-import net.fabricmc.loader.api.FabricLoader;
+import dev.architectury.event.EventResult;
+import dev.architectury.event.events.client.ClientGuiEvent;
+import dev.architectury.event.events.client.ClientScreenInputEvent;
+import dev.architectury.platform.forge.EventBuses;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
 import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraftforge.fml.IExtensionPoint;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.network.NetworkConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Bounced implements ClientModInitializer {
+@Mod(Bounced.ID)
+public class Bounced {
 	public static final String NAME = "Bounced!", ID = "bounced";
 	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
 	private static double primaryPos, secondaryPos;
@@ -26,14 +33,21 @@ public class Bounced implements ClientModInitializer {
 			shouldAnimate = new AtomicBoolean(true),
 			shouldJump = new AtomicBoolean(false);
 
-	@Override
-	public void onInitializeClient() {
-		boolean isSplasherLoaded = FabricLoader.getInstance().isModLoaded("splasher");
+	public Bounced() {
+		ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
+		EventBuses.registerModEventBus(Bounced.ID, FMLJavaModLoadingContext.get().getModEventBus());
+		if (FMLLoader.getDist().isClient()) {
+			this.onInitializeClient();
+		}
+	}
 
-		ScreenEvents.BEFORE_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
+	public void onInitializeClient() {
+		boolean isSplasherLoaded = ModList.get().isLoaded("splasher");
+
+		ClientGuiEvent.INIT_POST.register((screen, screenAccess) -> {
 			if (screen instanceof TitleScreen || screen instanceof AccessibilityOnboardingScreen) {
-				ScreenMouseEvents.beforeMouseClick(screen)
-						.register((currentScreen, mouseX, mouseY, button) -> {
+				ClientScreenInputEvent.MOUSE_CLICKED_POST.register((client, currentScreen, mouseX, mouseY, button) -> {
+							double scaledWidth = screenAccess.getScreen().width;
 							double centerX = scaledWidth / 2.0, y = 30, width = 310, height = 44;
 							if (!isIntro()
 										&& mouseX >= centerX - width / 2 && mouseX <= centerX + width / 2
@@ -43,7 +57,8 @@ public class Bounced implements ClientModInitializer {
 								if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY))
 									push();
 							}
-						});
+                    return EventResult.pass();
+                });
 			}
 		});
 	}
