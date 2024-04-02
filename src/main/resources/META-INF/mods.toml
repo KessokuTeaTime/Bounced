@@ -6,7 +6,7 @@ license = "GPL-3.0"
 modId = "bounced"
 version = "${version}"
 displayName = "Bounced"
-displayURL = "https://github.com/KrLite/Bounced"
+displayURL = "https://github.com/KessokuTeaTime/Bounced"
 authors = "Kessoku Tea Time"
 description = '''
 Such A Vibrant Title!
