@@ -26,7 +26,6 @@ dependencies {
 	minecraft(libs.minecraft)
 	mappings(libs.yarn) { artifact { classifier = "v2" } }
 	forge(libs.forge)
-	modApi(libs.architectury.api)
 
 	modCompileOnly(libs.splasher)
 }

@@ -1,18 +1,17 @@
 package band.kessokuteatime.bounced;
 
 import band.kessokuteatime.splasher.Splasher;
-import dev.architectury.event.EventResult;
-import dev.architectury.event.events.client.ClientGuiEvent;
-import dev.architectury.event.events.client.ClientScreenInputEvent;
-import dev.architectury.platform.forge.EventBuses;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraftforge.client.event.ScreenEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.network.NetworkConstants;
 import org.slf4j.Logger;
@@ -35,7 +34,6 @@ public class Bounced {
 
 	public Bounced() {
 		ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
-		EventBuses.registerModEventBus(Bounced.ID, FMLJavaModLoadingContext.get().getModEventBus());
 		if (FMLLoader.getDist().isClient()) {
 			this.onInitializeClient();
 		}
@@ -43,22 +41,25 @@ public class Bounced {
 
 	public void onInitializeClient() {
 		boolean isSplasherLoaded = ModList.get().isLoaded("splasher");
+		IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
 
-		ClientGuiEvent.INIT_POST.register((screen, screenAccess) -> {
+		forgeEventBus.<ScreenEvent.Init.Post>addListener(screenInitEvent -> {
+			Screen screen = screenInitEvent.getScreen();
 			if (screen instanceof TitleScreen || screen instanceof AccessibilityOnboardingScreen) {
-				ClientScreenInputEvent.MOUSE_CLICKED_POST.register((client, currentScreen, mouseX, mouseY, button) -> {
-							double scaledWidth = screenAccess.getScreen().width;
-							double centerX = scaledWidth / 2.0, y = 30, width = 310, height = 44;
-							if (!isIntro()
-										&& mouseX >= centerX - width / 2 && mouseX <= centerX + width / 2
-										&& mouseY >= y && mouseY <= y + height
-							) {
-								// Linkage with Splasher
-								if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY))
-									push();
-							}
-                    return EventResult.pass();
-                });
+				forgeEventBus.<ScreenEvent.MouseButtonPressed.Post>addListener(screenMousePressedEvent -> {
+					double mouseX = screenMousePressedEvent.getMouseX();
+					double mouseY = screenMousePressedEvent.getMouseY();
+					double scaledWidth = screen.width;
+					double centerX = scaledWidth / 2.0, y = 30, width = 310, height = 44;
+					if (!isIntro()
+							&& mouseX >= centerX - width / 2 && mouseX <= centerX + width / 2
+							&& mouseY >= y && mouseY <= y + height
+					) {
+						// Linkage with Splasher
+						if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY))
+							push();
+					}
+				});
 			}
 		});
 	}
