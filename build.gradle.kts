@@ -27,7 +27,7 @@ dependencies {
 	mappings(libs.yarn) { artifact { classifier = "v2" } }
 	forge(libs.forge)
 
-	modCompileOnly(libs.splasher)
+	//modCompileOnly(libs.splasher)
 }
 
 java {
