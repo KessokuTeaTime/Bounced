@@ -28,7 +28,7 @@ dependencies {
     mappings(libs.yarn) { artifact { classifier = "v2" } }
     forge(libs.forge)
 
-    //modCompileOnly(libs.splasher)
+    modCompileOnly(libs.splasher)
 }
 
 processResources {
@@ -53,22 +53,6 @@ java {
 
 jar {
     from("LICENSE")
-
-    // add some additional metadata to the jar manifest
-    /*
-    manifest {
-        attributes([
-                "Specification-Title"     : project.mod_id,
-                "Specification-Vendor"    : project.mod_author,
-                "Specification-Version"   : "1",
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : version,
-                "Implementation-Vendor"   : project.mod_author,
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-
-     */
 }
 
 // configure the maven publication
