@@ -1,0 +1,84 @@
+plugins {
+    id "maven-publish"
+    alias(libs.plugins.architectury.loom)
+}
+
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+
+group = libs.versions.maven.group.get()
+version = "${libs.versions.minecraft.get()}-${libs.versions.mod.get()}"
+base.archivesName = "${libs.versions.archives.name.get()}-forge"
+
+loom {
+    forge {
+        mixinConfigs = [
+                "bounced.mixins.json"
+        ]
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url = "https://jitpack.io" }
+    maven { url = "https://api.modrinth.com/maven" }
+}
+
+dependencies {
+    minecraft(libs.minecraft)
+    mappings(libs.yarn) { artifact { classifier = "v2" } }
+    forge(libs.forge)
+
+    //modCompileOnly(libs.splasher)
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.release = 17
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    withSourcesJar()
+}
+
+jar {
+    from("LICENSE")
+
+    // add some additional metadata to the jar manifest
+    /*
+    manifest {
+        attributes([
+                "Specification-Title"     : project.mod_id,
+                "Specification-Vendor"    : project.mod_author,
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : version,
+                "Implementation-Vendor"   : project.mod_author,
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+
+     */
+}
+
+// configure the maven publication
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+    }
+}
