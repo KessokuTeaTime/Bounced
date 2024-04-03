@@ -9,24 +9,17 @@ group = libs.versions.maven.group.get()
 version = "${libs.versions.minecraft.get()}-${libs.versions.mod.get()}"
 base.archivesName = "${libs.versions.archives.name.get()}-forge"
 
-loom {
-    forge {
-        mixinConfigs = [
-                "bounced.mixins.json"
-        ]
-    }
-}
-
 repositories {
     mavenCentral()
     maven { url = "https://jitpack.io" }
     maven { url = "https://api.modrinth.com/maven" }
+    maven { url = "https://maven.neoforged.net/releases/" }
 }
 
 dependencies {
     minecraft(libs.minecraft)
     mappings(libs.yarn) { artifact { classifier = "v2" } }
-    forge(libs.forge)
+    neoForge(libs.neoforge)
 
     modCompileOnly(libs.splasher)
 }

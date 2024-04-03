@@ -5,15 +5,14 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
-import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.IExtensionPoint;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.loading.FMLLoader;
-import net.minecraftforge.network.NetworkConstants;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.IExtensionPoint;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.client.event.ScreenEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +32,7 @@ public class Bounced {
 			shouldJump = new AtomicBoolean(false);
 
 	public Bounced() {
-		ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
+		ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> IExtensionPoint.DisplayTest.IGNORESERVERONLY, (a, b) -> true));
 		if (FMLLoader.getDist().isClient()) {
 			this.onInitializeClient();
 		}
@@ -41,12 +40,12 @@ public class Bounced {
 
 	public void onInitializeClient() {
 		boolean isSplasherLoaded = ModList.get().isLoaded("splasher");
-		IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+		IEventBus forgeEventBus = NeoForge.EVENT_BUS;
 
-		forgeEventBus.<ScreenEvent.Init.Post>addListener(screenInitEvent -> {
+		forgeEventBus.addListener(ScreenEvent.Init.Post.class, screenInitEvent -> {
 			Screen screen = screenInitEvent.getScreen();
 			if (screen instanceof TitleScreen || screen instanceof AccessibilityOnboardingScreen) {
-				forgeEventBus.<ScreenEvent.MouseButtonPressed.Post>addListener(screenMousePressedEvent -> {
+				forgeEventBus.addListener(ScreenEvent.MouseButtonPressed.Post.class, screenMousePressedEvent -> {
 					double mouseX = screenMousePressedEvent.getMouseX();
 					double mouseY = screenMousePressedEvent.getMouseY();
 					double scaledWidth = screen.width;

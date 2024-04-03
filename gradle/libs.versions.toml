@@ -3,9 +3,9 @@ maven-group = "band.kessokuteatime"
 archives-name = "bounced"
 mod = "4.0.0"
 
-minecraft = "1.20.1"
-yarn = "1.20.1+build.10"
-forge = "1.20.1-47.2.21"
+minecraft = "1.20.4"
+yarn = "1.20.4+build.3"
+neoforge = "20.4.219"
 architectury-loom = "1.5-SNAPSHOT"
 
 splasher = "6.0.0-mc1.20"
@@ -13,7 +13,7 @@ splasher = "6.0.0-mc1.20"
 [libraries]
 minecraft = { group = "com.mojang", name = "minecraft", version.ref = "minecraft" }
 yarn = { group = "net.fabricmc", name = "yarn", version.ref = "yarn" }
-forge = { group = "net.minecraftforge", name = "forge", version.ref = "forge" }
+neoforge = { group = "net.neoforged", name = "neoforge", version.ref = "neoforge" }
 
 splasher = { group = "maven.modrinth", name = "splasher", version.ref = "splasher" }
 

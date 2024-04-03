@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[43,)"
+loaderVersion = "[1,)"
 license = "GPL-3.0"
 
 [[mods]]
@@ -13,23 +13,19 @@ Such A Vibrant Title!
 '''
 logoFile = "icon.png"
 
+[[mixins]]
+config = "bounced.mixins.json"
+
 [[dependencies.bounced]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
-versionRange = "[43,)"
+versionRange = "[20.3,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.bounced]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.20,)"
+versionRange = "[1.20.3,1.20.4]"
 ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.bounced]]
-modId = "architectury"
-mandatory = true
-versionRange = "[9,)"
-ordering = "AFTER"
 side = "BOTH"
