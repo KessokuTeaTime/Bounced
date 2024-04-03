@@ -12,7 +12,7 @@ base.archivesName.set("${libs.versions.archives.name}-forge")
 
 loom {
 	forge {
-		mixinConfig("bounced.mixins.json")
+		mixinConfigs = listOf("bounced.mixins.json")
 	}
 }
 
