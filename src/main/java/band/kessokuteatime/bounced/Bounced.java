@@ -1,6 +1,6 @@
 package band.kessokuteatime.bounced;
 
-import band.kessokuteatime.splasher.Splasher;
+//import band.kessokuteatime.splasher.Splasher;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
 import net.minecraft.client.gui.screen.Screen;
@@ -56,8 +56,8 @@ public class Bounced {
 							&& mouseY >= y && mouseY <= y + height
 					) {
 						// Linkage with Splasher
-						if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY))
-							push();
+						//if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY))
+						//	push();
 					}
 				});
 			}
