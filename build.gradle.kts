@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
 	minecraft(libs.minecraft)
-	mappings(libs.yarn)
+	mappings(libs.yarn) { artifact { classifier = "v2" } }
 	modImplementation(libs.bundles.fabric)
 
 	modCompileOnly(libs.splasher)
