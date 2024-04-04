@@ -11,9 +11,9 @@ fabric-api = "0.96.11+1.20.4"
 fabric-loom = "1.6-SNAPSHOT"
 modpublisher = "2.1.0"
 
-splasher = "6.0.0-mc1.20"
+splasher = "6.1.0-fabric1.20.4"
 
-#id
+# id
 id-modrinth = "2mlOZXZr"
 id-curseforge = "844458"
 
