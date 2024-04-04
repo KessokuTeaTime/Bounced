@@ -1,4 +1,4 @@
-### <p align=right>[`→` Modrinth](https://modrinth.com/mod/bounced)</p>
+### <p align=right>[Main Branch `←`](https://github.com/KessokuTeaTime/Bounced)&emsp;[`→` Modrinth](https://modrinth.com/mod/bounced)</p>
 
 # <p align="center">Bounced! for Forge `1.20.1`</p>
 
