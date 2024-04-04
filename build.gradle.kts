@@ -93,5 +93,4 @@ publisher {
 	addAdditionalFile(tasks.remapSourcesJar)
 
 	changelog.set(file("CHANGELOG.md"))
-	debug.set(true)
 }
