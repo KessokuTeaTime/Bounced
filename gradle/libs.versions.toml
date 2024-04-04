@@ -1,14 +1,25 @@
 [versions]
 maven-group = "band.kessokuteatime"
 archives-name = "bounced"
-mod = "4.0.1"
+mod = "4.1.0"
+loader = "neoforge"
 
 minecraft = "1.20.4"
 yarn = "1.20.4+build.3"
 neoforge = "20.4.219"
 architectury-loom = "1.5-SNAPSHOT"
+modpublisher = "2.1.0"
 
 splasher = "6.0.3-mc1.20.4-neoforge"
+
+# id
+id-modrinth = "2mlOZXZr"
+id-curseforge = "844458"
+
+# display
+display-name = "Bounced"
+display-loader = "NeoForge"
+display-version = "1.20.4"
 
 [libraries]
 minecraft = { group = "com.mojang", name = "minecraft", version.ref = "minecraft" }
@@ -19,3 +30,4 @@ splasher = { group = "maven.modrinth", name = "splasher", version.ref = "splashe
 
 [plugins]
 architectury-loom = { id = "dev.architectury.loom", version.ref = "architectury-loom" }
+modpublisher = { id = "com.hypherionmc.modutils.modpublisher", version.ref = "modpublisher" }
