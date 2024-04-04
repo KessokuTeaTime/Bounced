@@ -87,7 +87,7 @@ publisher {
 
     setDisplayName("${display.name} ${libs.versions.mod.get()} for ${display.loader} ${display.version}")
 
-    setArtifact(jar)
+    setArtifact(remapJar)
     addAdditionalFile(remapSourcesJar)
 
     setChangelog(file("CHANGELOG.md"))
