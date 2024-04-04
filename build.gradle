@@ -1,13 +1,24 @@
+class Display {
+    String name
+    String loader
+    String version
+}
+
 plugins {
     id "maven-publish"
     alias(libs.plugins.architectury.loom)
+    alias(libs.plugins.modpublisher)
 }
 
-sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+Display display = new Display()
 
 group = libs.versions.maven.group.get()
-version = "${libs.versions.minecraft.get()}-${libs.versions.mod.get()}"
-base.archivesName = "${libs.versions.archives.name.get()}-forge"
+version = "${libs.versions.minecraft.get()}-${libs.versions.loader.get()}${libs.versions.mod.get()}"
+base.archivesName = "${libs.versions.archives.name.get()}"
+
+display.name = libs.versions.display.name.get()
+display.loader = libs.versions.display.loader.get()
+display.version = libs.versions.display.version.get()
 
 loom {
     forge {
@@ -65,4 +76,26 @@ publishing {
 
     repositories {
     }
+}
+
+publisher {
+    apiKeys {
+        modrinth(System.getenv("MODRINTH_TOKEN"))
+        curseforge(System.getenv("CURSEFORGE_TOKEN"))
+    }
+
+    setModrinthID(libs.versions.id.modrinth)
+    setCurseID(libs.versions.id.curseforge)
+
+    setVersionType("release")
+    setVersion(project.version.toString())
+    setGameVersions("1.20", "1.20.1")
+    setLoaders("forge", "neoforge")
+
+    setDisplayName("${display.name} ${libs.versions.mod.get()} for ${display.loader} ${display.version}")
+
+    setArtifact(remapJar)
+    addAdditionalFile(remapSourcesJar)
+
+    setChangelog(file("CHANGELOG.md"))
 }
