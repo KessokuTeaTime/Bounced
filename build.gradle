@@ -7,7 +7,7 @@ sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 
 group = libs.versions.maven.group.get()
 version = "${libs.versions.minecraft.get()}-${libs.versions.mod.get()}"
-base.archivesName = "${libs.versions.archives.name.get()}-forge"
+base.archivesName = "${libs.versions.archives.name.get()}-neoforge"
 
 repositories {
     mavenCentral()
