@@ -84,12 +84,12 @@ publisher {
 
 	versionType.set("release")
 	projectVersion.set(project.version.toString())
-	gameVersions.set(listOf("1.20", "1.20.1", "1.20.2", "1.20.3"))
+	gameVersions.set(listOf("1.20", "1.20.1", "1.20.2"))
 	loaders.set(listOf("fabric", "quilt"))
 	
 	displayName.set("${display.name} ${libs.versions.mod.get()} for ${display.loader} ${display.version}")
 
-	artifact.set(tasks.jar)
+	artifact.set(tasks.remapJar)
 	addAdditionalFile(tasks.remapSourcesJar)
 
 	changelog.set(file("CHANGELOG.md"))
