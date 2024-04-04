@@ -8,7 +8,7 @@ yarn = "1.20.4+build.3"
 neoforge = "20.4.219"
 architectury-loom = "1.5-SNAPSHOT"
 
-splasher = "6.0.0-mc1.20"
+splasher = "6.0.3-mc1.20.4-neoforge"
 
 [libraries]
 minecraft = { group = "com.mojang", name = "minecraft", version.ref = "minecraft" }
