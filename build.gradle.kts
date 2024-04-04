@@ -1,5 +1,3 @@
-import com.hypherionmc.modpublisher.plugin.ModPublisherGradleExtension.AdditionalFile
-
 class Display {
 	lateinit var name: String
 	lateinit var loader: String
