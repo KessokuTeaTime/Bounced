@@ -84,7 +84,7 @@ publisher {
 
 	versionType.set("release")
 	projectVersion.set(project.version.toString())
-	gameVersions.set(listOf("1.20.4"))
+	gameVersions.set(listOf("1.20", "1.20.1", "1.20.2", "1.20.3"))
 	loaders.set(listOf("fabric", "quilt"))
 	
 	displayName.set("${display.name} ${libs.versions.mod.get()} for ${display.loader} ${display.version}")
