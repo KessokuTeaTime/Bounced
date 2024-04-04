@@ -1,4 +1,4 @@
-### <p align=right>[`→` Modrinth](https://modrinth.com/mod/bounced)</p>
+### <p align=right>[Main Branch `←`](https://github.com/KessokuTeaTime/Splasher)&emsp;[`→` Modrinth](https://modrinth.com/mod/splasher)</p>
 
 # <p align="center">Bounced! for Fabric `1.20~1.20.1`</p>
 
