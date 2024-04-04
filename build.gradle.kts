@@ -87,7 +87,7 @@ publisher {
 	gameVersions.set(listOf("1.20.4"))
 	loaders.set(listOf("fabric", "quilt"))
 	
-	displayName.set("${display.name} for ${display.loader} ${display.version}")
+	displayName.set("${display.name} ${libs.versions.mod.get()} for ${display.loader} ${display.version}")
 
 	artifact.set(tasks.jar)
 	addAdditionalFile(tasks.remapSourcesJar)

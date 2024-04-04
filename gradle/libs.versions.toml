@@ -1,7 +1,7 @@
 [versions]
 maven-group = "band.kessokuteatime"
 archives-name = "bounced"
-mod = "4.1.0-alpha.1"
+mod = "4.1.0"
 loader = "fabric"
 
 minecraft = "1.20.4"
