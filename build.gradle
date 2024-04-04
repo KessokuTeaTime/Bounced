@@ -13,7 +13,7 @@ plugins {
 Display display = new Display()
 
 group = libs.versions.maven.group.get()
-version = "${libs.versions.minecraft.get()}-${libs.versions.loader.get()}${libs.versions.mod.get()}"
+version = "${libs.versions.mod.get()}-${libs.versions.loader.get()}${libs.versions.minecraft.get()}"
 base.archivesName = "${libs.versions.archives.name.get()}"
 
 display.name = libs.versions.display.name.get()
