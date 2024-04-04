@@ -4,14 +4,14 @@ archives-name = "bounced"
 mod = "4.1.0"
 loader = "fabric"
 
-minecraft = "1.20.4"
-yarn = "1.20.4+build.3"
+minecraft = "1.20.3"
+yarn = "1.20.3+build.1"
 fabric-loader = "0.15.9"
-fabric-api = "0.96.11+1.20.4"
+fabric-api = "0.91.1+1.20.3"
 fabric-loom = "1.6-SNAPSHOT"
 modpublisher = "2.1.0"
 
-splasher = "6.1.0-fabric1.20.4"
+splasher = "6.0.0-mc1.20"
 
 # id
 id-modrinth = "2mlOZXZr"
@@ -20,7 +20,7 @@ id-curseforge = "844458"
 # display
 display-name = "Bounced"
 display-loader = "Fabric"
-display-version = "1.20.4"
+display-version = "1.20.3~1.20.4"
 
 [libraries]
 minecraft = { group = "com.mojang", name = "minecraft", version.ref = "minecraft" }
