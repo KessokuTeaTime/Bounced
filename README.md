@@ -1,6 +1,6 @@
 ### <p align=right>[`→` Modrinth](https://modrinth.com/mod/bounced)</p>
 
-# <p align="center">Bounced! for MinecraftForge `1.20.1` (WIP)</p>
+# <p align="center">Bounced! for MinecraftForge `1.20.1`</p>
 
 ###### <p align="center">Bounces Your Minecraft Title as It Loads.</p>
 
