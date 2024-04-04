@@ -1,14 +1,14 @@
 [versions]
 maven-group = "band.kessokuteatime"
 archives-name = "bounced"
-mod = "4.0.0"
+mod = "4.0.1"
 
 minecraft = "1.20.1"
 yarn = "1.20.1+build.10"
 forge = "1.20.1-47.2.21"
 architectury-loom = "1.5-SNAPSHOT"
 
-splasher = "6.0.0-mc1.20"
+splasher = "6.0.3-mc1.20-forge"
 
 [libraries]
 minecraft = { group = "com.mojang", name = "minecraft", version.ref = "minecraft" }
