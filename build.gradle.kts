@@ -16,7 +16,7 @@ plugins {
 }
 
 group = libs.versions.maven.group.get()
-version = "${libs.versions.minecraft.get()}-${libs.versions.mod.get()}"
+version = "${libs.versions.mod.get()}-${libs.versions.loader.get()}${libs.versions.minecraft.get()}"
 
 display.name = libs.versions.display.name.get()
 display.loader = libs.versions.display.loader.get()
@@ -83,7 +83,7 @@ publisher {
 	curseID.set(libs.versions.id.curseforge)
 
 	versionType.set("release")
-	projectVersion.set("${libs.versions.mod.get()}-fabric${libs.versions.minecraft.get()}")
+	projectVersion.set(project.version.toString())
 	gameVersions.set(listOf("1.20.4"))
 	loaders.set(listOf("fabric", "quilt"))
 	
