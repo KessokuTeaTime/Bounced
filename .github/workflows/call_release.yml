@@ -12,3 +12,4 @@ permissions:
 jobs:
   call-workflow:
     uses: KessokuTeaTime/.github/.github/workflows/release.yml@main
+    secrets: inherit
