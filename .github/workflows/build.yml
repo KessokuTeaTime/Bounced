@@ -8,9 +8,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Get github short hash
-        id: github_short_hash
-        run: echo "result=$(git rev-parse --short "${{ github.sha }}")" >> $GITHUB_OUTPUT
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -28,18 +25,8 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew build
-      - name: Upload artifacts (fabric)
+      - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: Artifacts-fabric
-          path: ${{ github.workspace }}/fabric/build/libs
-      - name: Upload artifacts (forge)
-        uses: actions/upload-artifact@v3
-        with:
-          name: Artifacts-forge
-          path: ${{ github.workspace }}/forge/build/libs
-      - name: Upload artifacts (neoforge)
-        uses: actions/upload-artifact@v3
-        with:
-          name: Artifacts-forge
-          path: ${{ github.workspace }}/neoforge/build/libs
+          name: Artifacts
+          path: ${{ github.workspace }}/build/libs
