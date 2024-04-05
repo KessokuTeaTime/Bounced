@@ -1,0 +1,14 @@
+name: Publish Release
+
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: write
+
+jobs:
+  call-workflow:
+    uses: KessokuTeaTime/.github/.github/workflows/release.yml@main
