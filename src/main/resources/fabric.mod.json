@@ -6,7 +6,8 @@
   "name": "${display.name}",
   "description": "Get your 'Minecraft' bounced!",
   "authors": [
-    "Kessoku Tea Time"
+    "Kessoku Tea Time",
+    "KrLite"
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/bounced",
