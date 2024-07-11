@@ -41,8 +41,8 @@ dependencies {
 }
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 
 	withSourcesJar()
 }
@@ -84,7 +84,7 @@ publisher {
 
 	versionType.set("release")
 	projectVersion.set(project.version.toString())
-	gameVersions.set(listOf("1.20.3", "1.20.4"))
+	gameVersions.set(listOf("1.20.5", "1.20.6"))
 	loaders.set(listOf("fabric", "quilt"))
 	curseEnvironment.set("client")
 

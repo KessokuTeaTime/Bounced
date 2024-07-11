@@ -33,7 +33,7 @@ public class Bounced implements ClientModInitializer {
 			if (screen instanceof TitleScreen || screen instanceof AccessibilityOnboardingScreen) {
 				ScreenMouseEvents.beforeMouseClick(screen)
 						.register((currentScreen, mouseX, mouseY, button) -> {
-							double centerX = scaledWidth / 2.0, y = 30, width = 310, height = 44;
+							double centerX = scaledWidth / 2.0, y = 30 + primaryPos(), width = 310, height = 44;
 							if (!isIntro()
 										&& mouseX >= centerX - width / 2 && mouseX <= centerX + width / 2
 										&& mouseY >= y && mouseY <= y + height
@@ -47,15 +47,16 @@ public class Bounced implements ClientModInitializer {
 		});
 	}
 
+	public static double offset(boolean isIntro) {
+		return MinecraftClient.getInstance().getWindow().getScaledHeight() / (isIntro ? 4.1 : 7.0);
+	}
+
 	public static void update() {
+		double offset = offset(isIntro());
 		if (isIntro()) {
-			double offset = MinecraftClient.getInstance().getWindow().getScaledHeight() / 4.1;
 			primaryPos = (shouldAnimate.get() ? 0 : easeOutBounce(primaryAnimationTime) * offset) - offset;
 			secondaryPos = (shouldAnimate.get() ? 0 : easeOutBounce(secondaryAnimationTime) * offset) - offset;
-		}
-		else {
-			double offset = MinecraftClient.getInstance().getWindow().getScaledHeight() / 7.0;
-
+		} else {
 			if (shouldAnimate.get()) {
 				primaryPos = 0;
 				secondaryPos = 0;
@@ -93,9 +94,15 @@ public class Bounced implements ClientModInitializer {
 	}
 
 	public static void init() {
-		initializationTime = System.currentTimeMillis();
-		thresholdOffset = -1;
-		shouldJump.set(false);
+		init(false);
+	}
+
+	public static void init(boolean force) {
+		if (force || !isIntro()) {
+			initializationTime = System.currentTimeMillis();
+			thresholdOffset = -1;
+			shouldJump.set(false);
+		}
 	}
 
 	public static void push() {
