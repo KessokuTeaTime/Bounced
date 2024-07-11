@@ -34,7 +34,7 @@ public class Bounced implements ClientModInitializer {
 			if (screen instanceof TitleScreen || screen instanceof AccessibilityOnboardingScreen) {
 				ScreenMouseEvents.beforeMouseClick(screen)
 						.register((currentScreen, mouseX, mouseY, button) -> {
-							double centerX = scaledWidth / 2.0, y = 30, width = 310, height = 44;
+							double centerX = scaledWidth / 2.0, y = 30 + primaryPos(), width = 310, height = 44;
 							if (!isIntro()
 										&& mouseX >= centerX - width / 2 && mouseX <= centerX + width / 2
 										&& mouseY >= y && mouseY <= y + height
