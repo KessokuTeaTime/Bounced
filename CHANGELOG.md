@@ -1,5 +1,5 @@
-### Changes
+### Maintenance Update
 
-- Unified publishing using **modpublisher.**
-- Jar name migrate: `{id}-{mcversion}-{modversion}` -> `{id}-{modversion}-{loader}{mcversion}`.
-- Tag name migrate: `{id}-{modversion}-mc{mcversion}` -> `{id}-{modversion}-{loader}{mcversion}`.
+- **Fixed** misplacements of the title hitbox.
+- **Supported** `1.20.5+`.
+- **Updated** dependencies.
