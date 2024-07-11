@@ -5,6 +5,9 @@ import net.minecraft.client.gui.screen.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 
+/**
+ * This class is responsible for triggering the animation and animating the splash text.
+ */
 @Mixin(SplashTextRenderer.class)
 class SplashTextAnimator {
 	/**

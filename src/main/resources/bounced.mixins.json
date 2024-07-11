@@ -9,7 +9,6 @@
 		"AccessibilityOnboardingTrigger",
 		"LogoDrawerAnimator",
 		"SplashTextAnimator",
-		"SplashTextTranslator",
 		"TitleScreenTrigger",
 		"Trigger"
 	],
