@@ -3,7 +3,7 @@
   "id": "bounced",
   "version": "${version}",
 
-  "name": "${display.name}",
+  "name": "${display.name.get()}",
   "description": "Get your 'Minecraft' bounced!",
   "authors": [
     "Kessoku Tea Time",

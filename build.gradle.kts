@@ -1,11 +1,3 @@
-class Display {
-	lateinit var name: String
-	lateinit var loader: String
-	lateinit var version: String
-}
-
-var display: Display = Display()
-
 plugins {
 	base
 	java
@@ -15,12 +7,10 @@ plugins {
 	alias(libs.plugins.modpublisher)
 }
 
+val display = libs.versions.display
+
 group = libs.versions.maven.group.get()
 version = "${libs.versions.mod.get()}-${libs.versions.loader.get()}.${libs.versions.minecraft.get()}"
-
-display.name = libs.versions.display.name.get()
-display.loader = libs.versions.display.loader.get()
-display.version = libs.versions.display.version.get()
 
 base {
 	archivesName.set(libs.versions.archives.name)
@@ -96,7 +86,7 @@ publisher {
 	curseDepends.optional("splasher")
 	curseDepends.embedded()
 	
-	displayName.set("${display.name} ${libs.versions.mod.get()} for ${display.loader} ${display.version}")
+	displayName.set("${display.name.get()} ${libs.versions.mod.get()} for ${display.loader.get()} ${display.version.get()}")
 
 	artifact.set(tasks.remapJar)
 	addAdditionalFile(tasks.remapSourcesJar)
