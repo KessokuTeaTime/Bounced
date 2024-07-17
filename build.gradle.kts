@@ -16,7 +16,7 @@ plugins {
 }
 
 group = libs.versions.maven.group.get()
-version = "${libs.versions.mod.get()}-${libs.versions.loader.get()}${libs.versions.minecraft.get()}"
+version = "${libs.versions.mod.get()}-${libs.versions.loader.get()}.${libs.versions.minecraft.get()}"
 
 display.name = libs.versions.display.name.get()
 display.loader = libs.versions.display.loader.get()
