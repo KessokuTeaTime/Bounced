@@ -11,7 +11,7 @@ fabric-api = "0.97.8+1.20.5"
 fabric-loom = "1.6-SNAPSHOT"
 modpublisher = "2.1.0"
 
-splasher = "6.0.0-mc1.20"
+splasher = "6.2.2-fabric.1.20.3"
 
 # id
 id-modrinth = "2mlOZXZr"
