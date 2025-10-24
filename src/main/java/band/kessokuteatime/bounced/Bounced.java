@@ -1,19 +1,24 @@
 package band.kessokuteatime.bounced;
 
-import band.kessokuteatime.splasher.Splasher;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
-import net.fabricmc.loader.api.FabricLoader;
+//import band.kessokuteatime.splasher.Splasher;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforge.client.event.ScreenEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Bounced implements ClientModInitializer {
+@Mod(value = Bounced.ID, dist = Dist.CLIENT)
+public class Bounced {
 	public static final String NAME = "Bounced!", ID = "bounced";
 	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
 	private static double primaryPos, secondaryPos;
@@ -25,26 +30,38 @@ public class Bounced implements ClientModInitializer {
 			shouldAnimate = new AtomicBoolean(true),
 			shouldJump = new AtomicBoolean(false);
 
-	@Override
-	public void onInitializeClient() {
-		boolean isSplasherLoaded = FabricLoader.getInstance().isModLoaded("splasher");
+    public Bounced() {
+        if (FMLLoader.getDist().isClient()) {
+            this.onInitializeClient();
+        }
+    }
 
-		ScreenEvents.BEFORE_INIT.register((client, screen, scaledWidth, scaledHeight) -> {
+	public void onInitializeClient() {
+		boolean isSplasherLoaded = ModList.get().isLoaded("splasher");
+        IEventBus neoForgeEventBus = NeoForge.EVENT_BUS;
+
+        /*
+        neoForgeEventBus.addListener(ScreenEvent.Init.Post.class, screenInitEvent -> {
+            Screen screen = screenInitEvent.getScreen();
 			if (screen instanceof TitleScreen || screen instanceof AccessibilityOnboardingScreen) {
-				ScreenMouseEvents.beforeMouseClick(screen)
-						.register((currentScreen, mouseX, mouseY, button) -> {
-							double centerX = scaledWidth / 2.0, y = 30 + primaryPos(), width = 310, height = 44;
-							if (!isIntro()
-										&& mouseX >= centerX - width / 2 && mouseX <= centerX + width / 2
-										&& mouseY >= y && mouseY <= y + height
-							) {
-								// Linkage with Splasher
-								if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY))
-									push();
-							}
-						});
+                neoForgeEventBus.addListener(ScreenEvent.MouseButtonPressed.Post.class, screenMousePressedEvent -> {
+                    double mouseX = screenMousePressedEvent.getMouseX();
+                    double mouseY = screenMousePressedEvent.getMouseY();
+                    double scaledWidth = screen.width;
+
+                    double centerX = scaledWidth / 2.0, y = 30 + primaryPos(), width = 310, height = 44;
+                    if (!isIntro()
+                            && mouseX >= centerX - width / 2 && mouseX <= centerX + width / 2
+                            && mouseY >= y && mouseY <= y + height
+                    ) {
+                        // Linkage with Splasher
+                        if (!isSplasherLoaded || !Splasher.isMouseHovering(scaledWidth, mouseX, mouseY))
+                            push();
+                    }
+                });
 			}
 		});
+         */
 	}
 
 	public static double offset(boolean isIntro) {

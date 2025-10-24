@@ -1,3 +1,3 @@
 ### Maintenance Update
 
-- **Use** fully semantic versioning.
+- **Port** to 1.21 neoforge

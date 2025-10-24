@@ -3,7 +3,7 @@ plugins {
 	java
 	idea
 	`maven-publish`
-	alias(libs.plugins.fabric.loom)
+	alias(libs.plugins.architectury.loom)
 	alias(libs.plugins.modpublisher)
 }
 
@@ -20,14 +20,18 @@ repositories {
 	mavenCentral()
 	maven { url = uri("https://jitpack.io") }
 	maven { url = uri("https://api.modrinth.com/maven") }
+    maven { url = uri("https://maven.neoforged.net/releases/") }
 }
 
 dependencies {
 	minecraft(libs.minecraft)
-	mappings(libs.yarn) { artifact { classifier = "v2" } }
-	modImplementation(libs.bundles.fabric)
+    mappings(loom.layered {
+        mappings(variantOf(libs.yarn) { classifier("v2") })
+        mappings(libs.yarn.patch)
+    })
+    neoForge(libs.neoforge)
 
-	modCompileOnly(libs.splasher)
+	//modCompileOnly(libs.splasher)
 }
 
 java {
@@ -39,7 +43,7 @@ java {
 
 tasks {
 	processResources {
-		filesMatching("fabric.mod.json") {
+		filesMatching("META-INF/neoforge.mods.toml") {
 			expand(mapOf(
 					"version" to libs.versions.mod.get(),
 					"display" to display
@@ -74,15 +78,13 @@ publisher {
 
 	versionType.set("release")
 	projectVersion.set(project.version.toString())
-	gameVersions.set(listOf("1.21"))
-	loaders.set(listOf("fabric", "quilt"))
+	gameVersions.set(listOf("1.21", "1.21.1"))
+	loaders.set(listOf("neoforge"))
 	curseEnvironment.set("client")
 
-	modrinthDepends.required("fabric-api")
 	modrinthDepends.optional("splasher")
 	modrinthDepends.embedded()
 
-	curseDepends.required("fabric-api")
 	curseDepends.optional("splasher")
 	curseDepends.embedded()
 	
