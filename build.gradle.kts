@@ -31,7 +31,7 @@ dependencies {
     })
     neoForge(libs.neoforge)
 
-	//modCompileOnly(libs.splasher)
+	modCompileOnly(libs.splasher)
 }
 
 java {

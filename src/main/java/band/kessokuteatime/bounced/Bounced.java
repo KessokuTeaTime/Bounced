@@ -1,15 +1,13 @@
 package band.kessokuteatime.bounced;
 
-//import band.kessokuteatime.splasher.Splasher;
+import band.kessokuteatime.splasher.Splasher;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
@@ -31,20 +29,12 @@ public class Bounced {
 			shouldJump = new AtomicBoolean(false);
 
     public Bounced() {
-        if (FMLLoader.getDist().isClient()) {
-            this.onInitializeClient();
-        }
-    }
-
-	public void onInitializeClient() {
 		boolean isSplasherLoaded = ModList.get().isLoaded("splasher");
-        IEventBus neoForgeEventBus = NeoForge.EVENT_BUS;
 
-        /*
-        neoForgeEventBus.addListener(ScreenEvent.Init.Post.class, screenInitEvent -> {
+        NeoForge.EVENT_BUS.addListener(ScreenEvent.Init.Post.class, screenInitEvent -> {
             Screen screen = screenInitEvent.getScreen();
 			if (screen instanceof TitleScreen || screen instanceof AccessibilityOnboardingScreen) {
-                neoForgeEventBus.addListener(ScreenEvent.MouseButtonPressed.Post.class, screenMousePressedEvent -> {
+                NeoForge.EVENT_BUS.addListener(ScreenEvent.MouseButtonPressed.Post.class, screenMousePressedEvent -> {
                     double mouseX = screenMousePressedEvent.getMouseX();
                     double mouseY = screenMousePressedEvent.getMouseY();
                     double scaledWidth = screen.width;
@@ -61,7 +51,6 @@ public class Bounced {
                 });
 			}
 		});
-         */
 	}
 
 	public static double offset(boolean isIntro) {

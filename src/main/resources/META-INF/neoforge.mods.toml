@@ -5,7 +5,7 @@ license = "GPL-3.0"
 [[mods]]
 modId = "bounced"
 version = "${version}"
-displayName = "Bounced"
+displayName = "${display.name.get()}"
 displayURL = "https://github.com/KessokuTeaTime/Bounced"
 authors = "Kessoku Tea Time"
 description = '''

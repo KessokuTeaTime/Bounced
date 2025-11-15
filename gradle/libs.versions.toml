@@ -1,7 +1,7 @@
 [versions]
 maven-group = "band.kessokuteatime"
 archives-name = "bounced"
-mod = "4.1.0"
+mod = "4.1.1"
 loader = "neoforge"
 
 minecraft = "1.21.1"
@@ -11,7 +11,7 @@ neoforge = "21.1.213"
 architectury-loom = "1.10-SNAPSHOT"
 modpublisher = "2.+"
 
-splasher = "6.2.3-neoforge.1.21"
+splasher = "6.2.3-neoforge.1.21.1"
 
 # id
 id-modrinth = "2mlOZXZr"
