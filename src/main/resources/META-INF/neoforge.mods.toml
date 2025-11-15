@@ -11,7 +11,7 @@ authors = "Kessoku Tea Time"
 description = '''
 Such A Vibrant Title!
 '''
-logoFile = "icon.png"
+logoFile = "assets/bounced/icon.png"
 
 [[mixins]]
 config = "bounced.mixins.json"
