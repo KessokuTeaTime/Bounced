@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "band.kessokuteatime.bounced.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "AccessibilityOnboardingTrigger",
+    "ContainerEventHandlerTrigger",
+    "LogoRendererAnimator",
+    "SplashRendererAnimator",
+    "TitleScreenTrigger"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

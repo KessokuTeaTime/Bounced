@@ -2,9 +2,8 @@
   "schemaVersion": 1,
   "id": "bounced",
   "version": "${version}",
-
-  "name": "${display.name.get()}",
-  "description": "Get your 'Minecraft' bounced!",
+  "name": "${displayName}",
+  "description": "Bounces the Minecraft title whenever it appears.",
   "authors": [
     "Kessoku Tea Time",
     "KrLite"
@@ -14,26 +13,23 @@
     "sources": "https://github.com/KessokuTeaTime/Bounced",
     "issues": "https://github.com/KessokuTeaTime/Bounced/issues"
   },
-
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-only",
   "icon": "assets/bounced/icon.png",
-
   "environment": "client",
   "entrypoints": {
     "client": [
-      "band.kessokuteatime.bounced.Bounced"
+      "band.kessokuteatime.bounced.fabric.BouncedFabric"
     ]
   },
   "mixins": [
     "bounced.mixins.json"
   ],
-
   "depends": {
-    "fabricloader": "*",
-    "fabric-api": "*",
-    "minecraft": "1.21.x"
+    "fabricloader": ">=${fabricLoaderVersion}",
+    "minecraft": "${fabricMinecraftVersionRange}",
+    "java": ">=${javaVersion}"
   },
   "suggests": {
-    "splasher": "*"
+    "splasher": ">=${splasherVersion}"
   }
 }

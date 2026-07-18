@@ -1,11 +1,15 @@
 pluginManagement {
-    repositories {
-        maven {
-            name = "Fabric"
-            url = uri("https://maven.fabricmc.net/")
-        }
-        maven { url = uri("https://maven.firstdark.dev/releases") } // modpublisher
-        mavenCentral()
-        gradlePluginPortal()
-    }
+	repositories {
+		maven("https://maven.fabricmc.net/")
+		maven("https://maven.architectury.dev/")
+		maven("https://maven.neoforged.net/releases/")
+		maven("https://maven.firstdark.dev/releases")
+		gradlePluginPortal()
+	}
 }
+
+rootProject.name = "Bounced"
+
+include("common")
+include("fabric")
+include("neoforge")
