@@ -4,6 +4,7 @@ archives-name = "bounced"
 mod = "4.1.4"
 
 minecraft = "26.2"
+supported-minecraft = "26.2"
 java = "25"
 
 architectury-plugin = "3.5.169"
@@ -14,8 +15,8 @@ modpublisher = "2.2.1"
 fabric-loader = "0.19.3"
 fabric-minecraft-range = "~26.2"
 javafml = "3"
-neoforge = "26.2.0.25-beta"
-neoforge-range = "[26.2.0.25-beta,)"
+neoforge = "26.2.0.32-beta"
+neoforge-range = "[26.2.0.32-beta,)"
 neoforge-minecraft-range = "[26.2,26.3)"
 
 splasher = "6.2.4"
@@ -32,6 +33,7 @@ neoforge = { group = "net.neoforged", name = "neoforge", version.ref = "neoforge
 
 [plugins]
 architectury = { id = "architectury-plugin", version.ref = "architectury-plugin" }
-architectury-loom = { id = "dev.architectury.loom-no-remap", version.ref = "architectury-loom" }
+loom-remap = { id = "dev.architectury.loom", version.ref = "architectury-loom" }
+loom-no-remap = { id = "dev.architectury.loom-no-remap", version.ref = "architectury-loom" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
 modpublisher = { id = "com.hypherionmc.modutils.modpublisher", version.ref = "modpublisher" }

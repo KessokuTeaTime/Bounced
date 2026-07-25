@@ -7,7 +7,8 @@ import org.gradle.language.jvm.tasks.ProcessResources
 plugins {
 	base
 	alias(libs.plugins.architectury)
-	alias(libs.plugins.architectury.loom) apply false
+	alias(libs.plugins.loom.remap) apply false
+	alias(libs.plugins.loom.no.remap) apply false
 	alias(libs.plugins.shadow) apply false
 	alias(libs.plugins.modpublisher) apply false
 }
@@ -17,6 +18,7 @@ val modId = libs.versions.archives.name.get()
 val modVersion = libs.versions.mod.get()
 val minecraftVersion = libs.versions.minecraft.get()
 val javaVersion = libs.versions.java.get().toInt()
+val deobfuscatedMinecraft = minecraftVersion.startsWith("26.")
 
 group = libs.versions.maven.group.get()
 version = modVersion
@@ -33,7 +35,7 @@ subprojects {
 	apply(plugin = "java-library")
 	apply(plugin = "maven-publish")
 	apply(plugin = "architectury-plugin")
-	apply(plugin = "dev.architectury.loom-no-remap")
+	apply(plugin = if (deobfuscatedMinecraft) "dev.architectury.loom-no-remap" else "dev.architectury.loom")
 
 	group = rootProject.group
 	version = "$modVersion-${project.name}.$minecraftVersion"
@@ -47,11 +49,16 @@ subprojects {
 	}
 
 	extensions.configure<LoomGradleExtensionAPI> {
-		noIntermediateMappings()
+		if (deobfuscatedMinecraft) {
+			noIntermediateMappings()
+		}
 	}
 
 	dependencies {
 		add("minecraft", rootLibs.minecraft)
+		if (!deobfuscatedMinecraft) {
+			add("mappings", project.extensions.getByType<LoomGradleExtensionAPI>().officialMojangMappings())
+		}
 	}
 
 	extensions.configure<JavaPluginExtension> {

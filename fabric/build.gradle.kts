@@ -89,7 +89,7 @@ publisher {
 	curseID.set(libs.versions.id.curseforge)
 	versionType.set("release")
 	projectVersion.set(project.version.toString())
-	gameVersions.set(listOf(libs.versions.minecraft.get()))
+	gameVersions.set(libs.versions.supported.minecraft.get().split(","))
 	loaders.set(listOf("fabric"))
 	curseEnvironment.set("client")
 	modrinthDepends.optional("splasher")
