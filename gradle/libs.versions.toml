@@ -3,8 +3,8 @@ maven-group = "band.kessokuteatime"
 archives-name = "bounced"
 mod = "4.1.4"
 
-minecraft = "26.2"
-supported-minecraft = "26.2"
+minecraft = "26.1.2"
+supported-minecraft = "26.1,26.1.1,26.1.2"
 java = "25"
 
 architectury-plugin = "3.5.169"
@@ -13,11 +13,11 @@ shadow = "9.6.0"
 modpublisher = "2.2.1"
 
 fabric-loader = "0.19.3"
-fabric-minecraft-range = "~26.2"
-javafml = "3"
-neoforge = "26.2.0.32-beta"
-neoforge-range = "[26.2.0.32-beta,)"
-neoforge-minecraft-range = "[26.2,26.3)"
+fabric-minecraft-range = ">=26.1 <=26.1.2"
+javafml = "4"
+neoforge = "26.1.2.86"
+neoforge-range = "[26.1.2.86,)"
+neoforge-minecraft-range = "[26.1,26.2)"
 
 splasher = "6.2.4"
 

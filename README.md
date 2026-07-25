@@ -18,4 +18,4 @@
 
 ## Compatibility
 
-**Bounced** supports Minecraft 26.2 on Fabric and NeoForge and requires Java 25. It remains compatible with [Splasher](https://modrinth.com/mod/splasher); interactive splash clicks take priority over title clicks.
+**Bounced** supports Minecraft 26.1 through 26.1.2 on Fabric and NeoForge and requires Java 25. It remains compatible with [Splasher](https://modrinth.com/mod/splasher); interactive splash clicks take priority over title clicks.
