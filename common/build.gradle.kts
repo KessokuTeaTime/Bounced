@@ -8,6 +8,12 @@ architectury {
 
 dependencies {
 	add("implementation", libs.fabric.loader)
+	add("testImplementation", libs.junit)
+	add("testRuntimeOnly", libs.junit.platform.launcher)
+}
+
+tasks.test {
+	useJUnitPlatform()
 }
 
 publishing {
