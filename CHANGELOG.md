@@ -6,6 +6,7 @@
 - Added Fabric and NeoForge support through Architectury.
 - Reworked title animation and click handling for Minecraft's extracted GUI renderer.
 - Removed the circular runtime linkage with Splasher.
+- Fixed the initial title bounce timing and prevented a second bounce after accessibility onboarding.
 
 ## 4.1.3
 

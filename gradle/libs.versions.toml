@@ -11,6 +11,7 @@ architectury-plugin = "3.5.169"
 architectury-loom = "1.17.491"
 shadow = "9.6.0"
 modpublisher = "2.2.1"
+junit = "6.1.2"
 
 fabric-loader = "0.19.3"
 fabric-minecraft-range = ">=26.1 <=26.1.2"
@@ -30,6 +31,8 @@ display-name = "Bounced"
 minecraft = { group = "com.mojang", name = "minecraft", version.ref = "minecraft" }
 fabric-loader = { group = "net.fabricmc", name = "fabric-loader", version.ref = "fabric-loader" }
 neoforge = { group = "net.neoforged", name = "neoforge", version.ref = "neoforge" }
+junit = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junit" }
+junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junit" }
 
 [plugins]
 architectury = { id = "architectury-plugin", version.ref = "architectury-plugin" }
