@@ -8,6 +8,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 final class BouncedTest {
 	@Test
+	void startsWithTheFirstVisibleLogoFrame() {
+		assertFalse(Bounced.shouldStartIntro(true, false, 0.0F));
+		assertTrue(Bounced.shouldStartIntro(true, false, 0.01F));
+		assertTrue(Bounced.shouldStartIntro(true, true, 0.0F));
+		assertTrue(Bounced.shouldStartIntro(false, false, 0.0F));
+	}
+
+	@Test
 	void preservesOriginalScreenArmingLifecycle() {
 		Bounced.init(true, 1_000);
 		Bounced.update(3_000, 100);
@@ -18,6 +26,9 @@ final class BouncedTest {
 		Bounced.update(3_000, 100);
 		assertEquals(-100, Bounced.primaryPosition());
 		assertTrue(Bounced.isIntro(3_000));
+
+		Bounced.update(3_016, 100);
+		assertTrue(Bounced.primaryPosition() > -100);
 
 		Bounced.update(3_937, 100);
 		assertEquals(0, Bounced.primaryPosition());

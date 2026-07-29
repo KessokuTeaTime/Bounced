@@ -117,6 +117,14 @@ public final class Bounced {
 		return isIntro(Util.getMillis());
 	}
 
+	public static boolean shouldStartIntro(
+			boolean fading,
+			boolean keepLogoThroughFade,
+			float alpha
+	) {
+		return !fading || keepLogoThroughFade || alpha > 0.0F;
+	}
+
 	public static boolean isLogoHovered(int screenWidth, double mouseX, double mouseY) {
 		double left = screenWidth / 2.0 - 155;
 		double top = 30 + primaryPosition;

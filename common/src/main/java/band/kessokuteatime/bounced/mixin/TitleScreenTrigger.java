@@ -3,10 +3,12 @@ package band.kessokuteatime.bounced.mixin;
 import band.kessokuteatime.bounced.Bounced;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -17,6 +19,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class TitleScreenTrigger {
 	@Shadow
 	private boolean fading;
+	@Shadow
+	@Final
+	private LogoRenderer logoRenderer;
+
 
 	@Inject(method = "init", at = @At("RETURN"))
 	private void bounced$startIntro(CallbackInfo ci) {
@@ -31,7 +37,11 @@ public abstract class TitleScreenTrigger {
 			float partialTick,
 			CallbackInfo ci
 	) {
-		Bounced.resetWhen(!fading);
+		Bounced.resetWhen(Bounced.shouldStartIntro(
+				fading,
+				logoRenderer.keepLogoThroughFade(),
+				0.0F
+		));
 		Bounced.update();
 	}
 
@@ -50,7 +60,7 @@ public abstract class TitleScreenTrigger {
 			float newEnd
 	) {
 		float mapped = Mth.clampedMap(value, oldStart, oldEnd, newStart, newEnd);
-		Bounced.resetWhen(mapped > 0.9F);
+		Bounced.resetWhen(Bounced.shouldStartIntro(true, false, mapped));
 		return mapped;
 	}
 
