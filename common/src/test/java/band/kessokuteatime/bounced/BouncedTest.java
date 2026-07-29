@@ -8,33 +8,38 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 final class BouncedTest {
 	@Test
-	void preservesOneImmediateLaunchBounce() {
-		Bounced.startTitleIntro();
-		Bounced.update(1_600, 100);
+	void preservesOriginalScreenArmingLifecycle() {
+		Bounced.init(true, 1_000);
+		Bounced.update(3_000, 100);
 		assertEquals(-100, Bounced.primaryPosition());
-		assertTrue(Bounced.isIntro(1_600));
+		assertTrue(Bounced.isIntro(3_000));
 
-		Bounced.update(2_537, 100);
-		assertEquals(0, Bounced.primaryPosition());
-		assertFalse(Bounced.isIntro(2_537));
-
-		Bounced.startOnboardingIntro();
-		Bounced.update(3_200, 100);
+		Bounced.resetWhen(true, 3_000);
+		Bounced.update(3_000, 100);
 		assertEquals(-100, Bounced.primaryPosition());
+		assertTrue(Bounced.isIntro(3_000));
 
-		Bounced.update(4_137, 100);
-		Bounced.startOnboardingIntro();
-		Bounced.update(5_000, 100);
+		Bounced.update(3_937, 100);
+		assertEquals(0, Bounced.primaryPosition());
+		assertFalse(Bounced.isIntro(3_937));
+
+		Bounced.push();
+		Bounced.init(true, 3_000);
+		Bounced.resetWhen(true, 3_500);
+		Bounced.update(3_500, 100);
+		assertEquals(-100, Bounced.primaryPosition());
+		Bounced.update(4_437, 100);
+
+		Bounced.init(true, 5_000);
+		Bounced.resetWhen(true, 5_500);
+		Bounced.update(5_500, 100);
 		assertEquals(0, Bounced.primaryPosition());
 
-		Bounced.startTitleIntro();
+		Bounced.push();
+		Bounced.init(true, 6_000);
+		Bounced.resetWhen(true, 6_000);
 		Bounced.update(6_000, 100);
-		assertEquals(0, Bounced.primaryPosition());
-		assertFalse(Bounced.isIntro(6_000));
-
-		Bounced.startTitleIntro();
-		Bounced.update(7_600, 100);
 		assertEquals(-100, Bounced.primaryPosition());
-		assertTrue(Bounced.isIntro(7_600));
+		assertTrue(Bounced.isIntro(6_000));
 	}
 }

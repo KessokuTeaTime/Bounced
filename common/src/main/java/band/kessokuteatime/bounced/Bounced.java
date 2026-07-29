@@ -13,44 +13,27 @@ public final class Bounced {
 	private static double secondaryPosition;
 	private static long startTime = -1;
 	private static long initializationTime = -1;
+	private static long thresholdOffset;
 	private static boolean shouldAnimate = true;
 	private static boolean shouldJump;
-	private static boolean skipNextTitleIntro;
-	private static boolean introPending;
 
 	private Bounced() {
 	}
 
-	public static void startIntro() {
-		introPending = true;
-		shouldAnimate = false;
-		shouldJump = false;
-	}
-
-	public static void startOnboardingIntro() {
-		if (skipNextTitleIntro) {
-			return;
-		}
-		skipNextTitleIntro = true;
-		startIntro();
-	}
-
-	public static void startTitleIntro() {
-		if (skipNextTitleIntro) {
-			skipNextTitleIntro = false;
-			settle();
-			return;
-		}
-		startIntro();
-	}
 
 	public static void init() {
 		init(false);
 	}
 
 	public static void init(boolean force) {
-		if (force || !isIntro()) {
-			startIntro();
+		init(force, Util.getMillis());
+	}
+
+	static void init(boolean force, long now) {
+		if (force || !isIntro(now)) {
+			initializationTime = now;
+			thresholdOffset = -1;
+			shouldJump = false;
 		}
 	}
 
@@ -60,12 +43,19 @@ public final class Bounced {
 	}
 
 	public static void resetWhen(boolean condition) {
+		resetWhen(condition, Util.getMillis());
+	}
+
+	static void resetWhen(boolean condition, long now) {
 		if (!condition || !shouldAnimate) {
 			return;
 		}
 
 		shouldAnimate = false;
-		startTime = Util.getMillis();
+		startTime = now;
+		if (thresholdOffset == -1) {
+			thresholdOffset = now - initializationTime;
+		}
 	}
 
 	public static void update() {
@@ -74,9 +64,6 @@ public final class Bounced {
 	}
 
 	static void update(long now, double offset) {
-		if (introPending) {
-			beginIntro(now);
-		}
 		boolean intro = isIntro(now);
 
 		if (intro) {
@@ -145,24 +132,9 @@ public final class Bounced {
 		return easeOutBounce((long) animationTime, Util.getMillis());
 	}
 
-	private static void beginIntro(long now) {
-		introPending = false;
-		initializationTime = now;
-		startTime = now;
-	}
-
-	private static void settle() {
-		primaryPosition = 0;
-		secondaryPosition = 0;
-		startTime = -SECONDARY_ANIMATION_TIME - 1;
-		initializationTime = startTime;
-		introPending = false;
-		shouldAnimate = false;
-		shouldJump = false;
-	}
-
 	static boolean isIntro(long now) {
-		return introPending || now - initializationTime <= SECONDARY_ANIMATION_TIME;
+		return thresholdOffset == -1
+				|| now - (initializationTime + thresholdOffset) <= SECONDARY_ANIMATION_TIME;
 	}
 
 	private static double easeOutBounce(long animationTime, long now) {

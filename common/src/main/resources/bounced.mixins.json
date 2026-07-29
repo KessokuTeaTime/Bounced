@@ -8,6 +8,7 @@
     "ContainerEventHandlerTrigger",
     "LogoRendererAnimator",
     "SplashRendererAnimator",
+    "ScreenTrigger",
     "TitleScreenTrigger"
   ],
   "injectors": {
