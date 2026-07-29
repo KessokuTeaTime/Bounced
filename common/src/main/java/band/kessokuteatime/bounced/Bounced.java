@@ -16,44 +16,32 @@ public final class Bounced {
 	private static boolean shouldAnimate = true;
 	private static boolean shouldJump;
 	private static boolean skipNextTitleIntro;
+	private static boolean introPending;
 
 	private Bounced() {
 	}
 
 	public static void startIntro() {
-		startIntro(Util.getMillis());
-	}
-
-	static void startIntro(long now) {
-		initializationTime = now;
-		startTime = now;
+		introPending = true;
 		shouldAnimate = false;
 		shouldJump = false;
 	}
 
 	public static void startOnboardingIntro() {
-		startOnboardingIntro(Util.getMillis());
-	}
-
-	static void startOnboardingIntro(long now) {
 		if (skipNextTitleIntro) {
 			return;
 		}
 		skipNextTitleIntro = true;
-		startIntro(now);
+		startIntro();
 	}
 
 	public static void startTitleIntro() {
-		startTitleIntro(Util.getMillis());
-	}
-
-	static void startTitleIntro(long now) {
 		if (skipNextTitleIntro) {
 			skipNextTitleIntro = false;
-			settle(now);
+			settle();
 			return;
 		}
-		startIntro(now);
+		startIntro();
 	}
 
 	public static void init() {
@@ -86,6 +74,9 @@ public final class Bounced {
 	}
 
 	static void update(long now, double offset) {
+		if (introPending) {
+			beginIntro(now);
+		}
 		boolean intro = isIntro(now);
 
 		if (intro) {
@@ -154,17 +145,24 @@ public final class Bounced {
 		return easeOutBounce((long) animationTime, Util.getMillis());
 	}
 
-	private static void settle(long now) {
+	private static void beginIntro(long now) {
+		introPending = false;
+		initializationTime = now;
+		startTime = now;
+	}
+
+	private static void settle() {
 		primaryPosition = 0;
 		secondaryPosition = 0;
-		startTime = now - SECONDARY_ANIMATION_TIME - 1;
+		startTime = -SECONDARY_ANIMATION_TIME - 1;
 		initializationTime = startTime;
+		introPending = false;
 		shouldAnimate = false;
 		shouldJump = false;
 	}
 
 	static boolean isIntro(long now) {
-		return now - initializationTime <= SECONDARY_ANIMATION_TIME;
+		return introPending || now - initializationTime <= SECONDARY_ANIMATION_TIME;
 	}
 
 	private static double easeOutBounce(long animationTime, long now) {
