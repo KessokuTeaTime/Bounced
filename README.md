@@ -8,7 +8,7 @@
 
 **Bounced** does nothing except make the Minecraft title bounce whenever it appears, adding a little vitality to the title screen.
 
-**Bounced** may be too simple to have a config, and if you don't like the animations, just uninstall the mod. Otherwise if you like it, feel free recommending **Bounced** to your friends!
+**Bounced** may be too simple to have a config, and if you don't like the animations, just uninstall the mod. Otherwise, if you like it, feel free recommending **Bounced** to your friends!
 
 <br />
 
